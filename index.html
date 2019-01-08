@@ -1485,6 +1485,16 @@ should lose all economic value, while any REP Staked on the Market’s true Outc
 
 <p>Creates a <a href="#categorical-market">Categorical Market</a> in a specified <a href="#universe">Universe</a>. This function will trigger a <a href="#MarketCreated"><code class="prettyprint">MarketCreated</code></a> event and <a href="#TokensTransferred"><code class="prettyprint">TokensTransferred</code></a> event if the <a href="#market">Market</a> is created successfully.</p>
 
+<p>This transaction will fail if:</p>
+
+<ul>
+<li><code class="prettyprint">p._outcomes</code> contains fewer than 2 outcomes or more than 8 outcomes.</li>
+<li><code class="prettyprint">p._designatedReporterAddress</code> is set to the null address.</li>
+<li><code class="prettyprint">p._feePerEthInWei</code> is greater than the maximum fee (0.5 ETH).</li>
+<li><code class="prettyprint">p._endTime</code> has already passed.</li>
+<li>The Universe is Forking.</li>
+</ul>
+
 <p>NOTE: The account attempting to create the new market must have sufficient REP in order for the market to be created. This is also true when calling <code class="prettyprint">eth_estimateGas</code>, which essentially does a trial run of the transaction to determine what the gas cost would be to actually run it. </p>
 
 <h4 id="strong-strong"><strong>Parameters:</strong></h4>
@@ -1518,6 +1528,17 @@ should lose all economic value, while any REP Staked on the Market’s true Outc
 <h3 id="augur-createmarket-createscalarmarket-p">augur.createMarket.createScalarMarket(p)</h3>
 
 <p>Creates a <a href="#scalar-market">Scalar Market</a> in a specified <a href="#universe">Universe</a>. This function will trigger a <a href="#MarketCreated"><code class="prettyprint">MarketCreated</code></a> event and <a href="#TokensTransferred"><code class="prettyprint">TokensTransferred</code></a> event if the <a href="#market">Market</a> is created successfully.</p>
+
+<p>This transaction will fail if:</p>
+
+<ul>
+<li><code class="prettyprint">p._outcomes</code> contains fewer than 2 outcomes or more than 8 outcomes.</li>
+<li><code class="prettyprint">p._designatedReporterAddress</code> is set to the null address.</li>
+<li><code class="prettyprint">p._numTicks</code> is less than 2.</li>
+<li><code class="prettyprint">p._feePerEthInWei</code> is greater than the maximum fee (0.5 ETH).</li>
+<li><code class="prettyprint">p._endTime</code> has already passed.</li>
+<li>The Universe is Forking.</li>
+</ul>
 
 <p>NOTE: The account attempting to create the new market must have sufficient REP in order for the market to be created. This is also true when calling <code class="prettyprint">eth_estimateGas</code>, which essentially does a trial run of the transaction to determine what the gas cost would be to actually run it. </p>
 
@@ -1554,6 +1575,16 @@ should lose all economic value, while any REP Staked on the Market’s true Outc
 <h3 id="augur-createmarket-createyesnomarket-p">augur.createMarket.createYesNoMarket(p)</h3>
 
 <p>Creates a <a href="#yes-no-market">Yes/No Market</a> in a specified <a href="#universe">Universe</a>. This function will trigger a <a href="#MarketCreated"><code class="prettyprint">MarketCreated</code></a> event and <a href="#TokensTransferred"><code class="prettyprint">TokensTransferred</code></a> event if the <a href="#market">Market</a> is created successfully.</p>
+
+<p>This transaction will fail if:</p>
+
+<ul>
+<li><code class="prettyprint">p._outcomes</code> contains fewer than 2 outcomes or more than 8 outcomes.</li>
+<li><code class="prettyprint">p._designatedReporterAddress</code> is set to the null address.</li>
+<li><code class="prettyprint">p._feePerEthInWei</code> is greater than the maximum fee (0.5 ETH).</li>
+<li><code class="prettyprint">p._endTime</code> has already passed.</li>
+<li>The Universe is Forking.</li>
+</ul>
 
 <p>NOTE: The account attempting to create the new market must have sufficient REP in order for the market to be created. This is also true when calling <code class="prettyprint">eth_estimateGas</code>, which essentially does a trial run of the transaction to determine what the gas cost would be to actually run it.</p>
 
@@ -12245,6 +12276,16 @@ should lose all economic value, while any REP Staked on the Market’s true Outc
 
 <p>Creates a new <a href="#categorical-market">Categorical Market</a>. This transaction will trigger a <a href="#MarketCreated"><code class="prettyprint">MarketCreated</code></a> event if the <a href="#market">Market</a> is created successfully. After the transaction has completed successfully, the Market address can be obtained by calling <code class="prettyprint">augur.createMarket.getMarketFromCreateMarketReceipt</code>.</p>
 
+<p>This transaction will fail if:</p>
+
+<ul>
+<li><code class="prettyprint">p._outcomes</code> contains fewer than 2 outcomes or more than 8 outcomes.</li>
+<li><code class="prettyprint">p._designatedReporterAddress</code> is set to the null address.</li>
+<li><code class="prettyprint">p._feePerEthInWei</code> is greater than the maximum fee (0.5 ETH).</li>
+<li><code class="prettyprint">p._endTime</code> has already passed.</li>
+<li>The Universe is Forking.</li>
+</ul>
+
 <p>NOTE: The account attempting to create the new market must have sufficient REP in order for the market to be created. This is also true when calling <code class="prettyprint">eth_estimateGas</code>, which essentially does a trial run of the transaction to determine what the gas cost would be to actually run it. </p>
 
 <h4 id="parameters">Parameters:</h4>
@@ -12330,6 +12371,17 @@ should lose all economic value, while any REP Staked on the Market’s true Outc
 
 <p>Creates a new <a href="#scalar-market">Scalar Market</a>. This transaction will trigger a <a href="#MarketCreated"><code class="prettyprint">MarketCreated</code></a> event if the <a href="#market">Market</a> is created successfully. After the transaction has completed successfully, the Market address can be obtained by calling <code class="prettyprint">augur.createMarket.getMarketFromCreateMarketReceipt</code>.</p>
 
+<p>This transaction will fail if:</p>
+
+<ul>
+<li><code class="prettyprint">p._outcomes</code> contains fewer than 2 outcomes or more than 8 outcomes.</li>
+<li><code class="prettyprint">p._designatedReporterAddress</code> is set to the null address.</li>
+<li><code class="prettyprint">p._numTicks</code> is less than 2.</li>
+<li><code class="prettyprint">p._feePerEthInWei</code> is greater than the maximum fee (0.5 ETH).</li>
+<li><code class="prettyprint">p._endTime</code> has already passed.</li>
+<li>The Universe is Forking.</li>
+</ul>
+
 <p>NOTE: The account attempting to create the new market must have sufficient REP in order for the market to be created. This is also true when calling <code class="prettyprint">eth_estimateGas</code>, which essentially does a trial run of the transaction to determine what the gas cost would be to actually run it. </p>
 
 <h4 id="parameters">Parameters:</h4>
@@ -12377,6 +12429,16 @@ should lose all economic value, while any REP Staked on the Market’s true Outc
 <h3 id="augur-api-universe-createyesnomarket-p">augur.api.Universe.createYesNoMarket(p)</h3>
 
 <p>Creates a new <a href="#yes-no-market">Yes/No Market</a>. This transaction will trigger a <a href="#MarketCreated"><code class="prettyprint">MarketCreated</code></a> event if the <a href="#market">Market</a> is created successfully. After the transaction has completed successfully, the Market address can be obtained by calling <code class="prettyprint">augur.createMarket.getMarketFromCreateMarketReceipt</code>.</p>
+
+<p>This transaction will fail if:</p>
+
+<ul>
+<li><code class="prettyprint">p._outcomes</code> contains fewer than 2 outcomes or more than 8 outcomes.</li>
+<li><code class="prettyprint">p._designatedReporterAddress</code> is set to the null address.</li>
+<li><code class="prettyprint">p._feePerEthInWei</code> is greater than the maximum fee (0.5 ETH).</li>
+<li><code class="prettyprint">p._endTime</code> has already passed.</li>
+<li>The Universe is Forking.</li>
+</ul>
 
 <p>NOTE: The account attempting to create the new market must have sufficient REP in order for the market to be created. This is also true when calling <code class="prettyprint">eth_estimateGas</code>, which essentially does a trial run of the transaction to determine what the gas cost would be to actually run it. </p>
 
