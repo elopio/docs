@@ -1514,6 +1514,7 @@ This function will fail if:
     * **`p._payoutNumerators`**  (Array.&lt;number>|Array.&lt;string>) Array representing the Market's Payout Set.
     * **`p._invalid`**  (boolean) Whether the Outcome of the Market is Invalid.
     * **`p._amount`**  (string) Amount to contribute to the Dispute Crowdsourcer, in [attoREP](#atto-prefix).
+    * **`p._description`** (string) &lt;optional> Explanation for why the contributor is Staking on this particular Outcome.
     * **`p.tx`** (Object) Object containing details about how this transaction should be made.
         * **`p.tx.to`** (string) Ethereum contract address on which to call this function, as a 20-byte hexadecimal string.
         * **`p.tx.gas`** (string) Gas limit to use when submitting this transaction, as a hexadecimal string.
@@ -1568,6 +1569,7 @@ This transaction will fail if:
 * **`p`** (Object) Parameters object.
     * **`p._payoutNumerators`**  (Array.&lt;number>|Array.&lt;string>) Array representing the Market's Payout Set.
     * **`p._invalid`**  (boolean) Whether the Outcome of the Market is Invalid.
+    * **`p._description`** (string) &lt;optional> Explanation for why the contributor is Staking on this particular Outcome.
     * **`p.tx`** (Object) Object containing details about how this transaction should be made.
         * **`p.tx.to`** (string) Ethereum contract address on which to call this function, as a 20-byte hexadecimal string.
         * **`p.tx.gas`** (string) Gas limit to use when submitting this transaction, as a hexadecimal string.

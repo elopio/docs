@@ -1042,6 +1042,14 @@ augur.api.Market.getDesignatedReporter({
 // example output:
 "0xca3edca4ed326bbcb77e914b379913b12d49654d"
 
+augur.api.Market.getDesignatedReportingEndTime({ 
+  tx: { to: market } 
+}, function (error, designatedReportingEndTime) { 
+  console.log(designatedReportingEndTime); 
+});
+// example output:
+"1546989650"
+
 augur.api.Market.getDisputePacingOn({ 
   tx: { to: market } 
 }, function (error, disputePacingOn) { 
@@ -1354,6 +1362,21 @@ Returns the Ethereum address of the [Designated Reporter](#designated-reporter) 
 #### **Returns:**
 
 * (string) Ethereum address of the Designated Reporter for the Market, as a 20-byte hexadecimal string.
+
+### augur.api.Market.getDesignatedReportingEndTime((p, callback)
+
+Returns the Unix timestamp at which the specified [Market's](#market) [Designated Reporting Phase](#designated-reporting-phase) ends.
+
+#### **Parameters:**
+
+* **`p`** (Object) Parameters object.  
+    * **`p.tx`** (Object) Object containing details about how this function call should be made.
+        * **`p.tx.to`** (string) Ethereum contract address of the Market contract on which to call this function, as a 20-byte hexadecimal string.
+* **`callback`** (function) &lt;optional> Called after the function's result has been retrieved.
+
+#### **Returns:**
+
+* (number) Unix timestamp at which the Market's Designated Reporting Phase ends, as a stringified unsigned integer.
 
 ### augur.api.Market.getDisputePacingOn(p, callback)
 
