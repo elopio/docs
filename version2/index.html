@@ -5503,6 +5503,14 @@ should lose all economic value, while any REP Staked on the Market’s true Outc
 <span class="c1">// example output:</span>
 <span class="s2">"0xca3edca4ed326bbcb77e914b379913b12d49654d"</span>
 
+<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">Market</span><span class="p">.</span><span class="nx">getDesignatedReportingEndTime</span><span class="p">({</span> 
+  <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> <span class="na">to</span><span class="p">:</span> <span class="nx">market</span> <span class="p">}</span> 
+<span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">designatedReportingEndTime</span><span class="p">)</span> <span class="p">{</span> 
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">designatedReportingEndTime</span><span class="p">);</span> 
+<span class="p">});</span>
+<span class="c1">// example output:</span>
+<span class="s2">"1546989650"</span>
+
 <span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">Market</span><span class="p">.</span><span class="nx">getDisputePacingOn</span><span class="p">({</span> 
   <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> <span class="na">to</span><span class="p">:</span> <span class="nx">market</span> <span class="p">}</span> 
 <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">disputePacingOn</span><span class="p">)</span> <span class="p">{</span> 
@@ -5883,6 +5891,31 @@ should lose all economic value, while any REP Staked on the Market’s true Outc
 
 <ul>
 <li>(string) Ethereum address of the Designated Reporter for the Market, as a 20-byte hexadecimal string.</li>
+</ul>
+
+<h3 id="augur-api-market-getdesignatedreportingendtime-p-callback">augur.api.Market.getDesignatedReportingEndTime((p, callback)</h3>
+
+<p>Returns the Unix timestamp at which the specified <a href="#market">Market&rsquo;s</a> <a href="#designated-reporting-phase">Designated Reporting Phase</a> ends.</p>
+
+<h4 id="strong-strong"><strong>Parameters:</strong></h4>
+
+<ul>
+<li><strong><code class="prettyprint">p</code></strong> (Object) Parameters object.<br>
+
+<ul>
+<li><strong><code class="prettyprint">p.tx</code></strong> (Object) Object containing details about how this function call should be made.
+
+<ul>
+<li><strong><code class="prettyprint">p.tx.to</code></strong> (string) Ethereum contract address of the Market contract on which to call this function, as a 20-byte hexadecimal string.</li>
+</ul></li>
+</ul></li>
+<li><strong><code class="prettyprint">callback</code></strong> (function) &lt;optional&gt; Called after the function&rsquo;s result has been retrieved.</li>
+</ul>
+
+<h4 id="strong-strong"><strong>Returns:</strong></h4>
+
+<ul>
+<li>(number) Unix timestamp at which the Market&rsquo;s Designated Reporting Phase ends, as a stringified unsigned integer.</li>
 </ul>
 
 <h3 id="augur-api-market-getdisputepacingon-p-callback">augur.api.Market.getDisputePacingOn(p, callback)</h3>
@@ -7644,7 +7677,7 @@ should lose all economic value, while any REP Staked on the Market’s true Outc
 
 <h3 id="augur-api-universe-getdisputerounddurationinseconds-p-callback">augur.api.Universe.getDisputeRoundDurationInSeconds(p, callback)</h3>
 
-<p>Returns the number of seconds in a <a href="#dispute-round">Dispute Round</a> within the specified <a href="#universe">Universe</a>.</p>
+<p>Returns the maximum number of seconds a <a href="#dispute-round">Dispute Round</a> can last within the specified <a href="#universe">Universe</a>.</p>
 
 <h4 id="strong-strong"><strong>Parameters:</strong></h4>
 
@@ -7664,7 +7697,7 @@ should lose all economic value, while any REP Staked on the Market’s true Outc
 <h4 id="strong-strong"><strong>Returns:</strong></h4>
 
 <ul>
-<li>(string) Number of seconds in a Universe&rsquo;s Dispute Round, as a stringified unsigned integer.</li>
+<li>(string) Maximum number of seconds in a Universe&rsquo;s Dispute Round, as a stringified unsigned integer.</li>
 </ul>
 
 <h3 id="augur-api-universe-getdisputethresholdfordisputepacing-p-callback">augur.api.Universe.getDisputeThresholdForDisputePacing(p, callback)</h3>
@@ -10021,6 +10054,7 @@ should lose all economic value, while any REP Staked on the Market’s true Outc
 <li><strong><code class="prettyprint">p._payoutNumerators</code></strong>  (Array.&lt;number&gt;|Array.&lt;string&gt;) Array representing the Market&rsquo;s Payout Set.</li>
 <li><strong><code class="prettyprint">p._invalid</code></strong>  (boolean) Whether the Outcome of the Market is Invalid.</li>
 <li><strong><code class="prettyprint">p._amount</code></strong>  (string) Amount to contribute to the Dispute Crowdsourcer, in <a href="#atto-prefix">attoREP</a>.</li>
+<li><strong><code class="prettyprint">p._description</code></strong> (string) &lt;optional&gt; Explanation for why the contributor is Staking on this particular Outcome.</li>
 <li><strong><code class="prettyprint">p.tx</code></strong> (Object) Object containing details about how this transaction should be made.
 
 <ul>
@@ -10099,6 +10133,7 @@ should lose all economic value, while any REP Staked on the Market’s true Outc
 <ul>
 <li><strong><code class="prettyprint">p._payoutNumerators</code></strong>  (Array.&lt;number&gt;|Array.&lt;string&gt;) Array representing the Market&rsquo;s Payout Set.</li>
 <li><strong><code class="prettyprint">p._invalid</code></strong>  (boolean) Whether the Outcome of the Market is Invalid.</li>
+<li><strong><code class="prettyprint">p._description</code></strong> (string) &lt;optional&gt; Explanation for why the contributor is Staking on this particular Outcome.</li>
 <li><strong><code class="prettyprint">p.tx</code></strong> (Object) Object containing details about how this transaction should be made.
 
 <ul>
@@ -12733,9 +12768,9 @@ should lose all economic value, while any REP Staked on the Market’s true Outc
 <tr>
 <td><a name="DisputeCrowdsourcerContribution"></a>DisputeCrowdsourcerContribution</td>
 <td><a href="https://github.com/AugurProject/augur-core/blob/master/source/contracts/Augur.sol">Augur</a></td>
-<td>The Ethereum address <code class="prettyprint">reporter</code> <a href="#dispute-stake">Staked</a> <code class="prettyprint">amountStaked</code> <a href="#rep">REP</a> on the <a href="#outcome">Outcome</a> for <code class="prettyprint">disputeCrowdsourcer</code> in <code class="prettyprint">market</code> of <code class="prettyprint">universe</code>.</td>
+<td>The Ethereum address <code class="prettyprint">reporter</code> <a href="#dispute-stake">Staked</a> <code class="prettyprint">amountStaked</code> <a href="#rep">REP</a> on the <a href="#outcome">Outcome</a> for <code class="prettyprint">disputeCrowdsourcer</code> in <code class="prettyprint">market</code> of <code class="prettyprint">universe</code>. The <code class="prettyprint">description</code> field can be used by <code class="prettyprint">reporter</code> to explain why they think a specific Outcome is correct.</td>
 <td>universe, reporter, market</td>
-<td>disputeCrowdsourcer, amountStaked</td>
+<td>disputeCrowdsourcer, amountStaked, description</td>
 </tr>
 <tr>
 <td><a name="DisputeCrowdsourcerCreated"></a>DisputeCrowdsourcerCreated</td>
@@ -12775,9 +12810,9 @@ should lose all economic value, while any REP Staked on the Market’s true Outc
 <tr>
 <td><a name="InitialReportSubmitted"></a>InitialReportSubmitted</td>
 <td><a href="https://github.com/AugurProject/augur-core/blob/master/source/contracts/Augur.sol">Augur</a></td>
-<td><code class="prettyprint">reporter</code> has submitted an <a href="#initial-report">Initial Report</a> for the <code class="prettyprint">market</code> in <code class="prettyprint">universe</code> with <code class="prettyprint">amountStaked</code> <a href="#rep">REP</a> staked on the <a href="#outcome">Outcome</a> <code class="prettyprint">payoutNumerators</code>. If <code class="prettyprint">reporter</code> is the <a href="#designated-reporter">Designated Reporter</a> (as opposed to the <a href="#first-public-reporter">First Public Reporter</a>), <code class="prettyprint">isDesignatedReporter</code> is set to true.</td>
+<td><code class="prettyprint">reporter</code> has submitted an <a href="#initial-report">Initial Report</a> for the <code class="prettyprint">market</code> in <code class="prettyprint">universe</code> with <code class="prettyprint">amountStaked</code> <a href="#rep">REP</a> staked on the <a href="#outcome">Outcome</a> <code class="prettyprint">payoutNumerators</code>. If <code class="prettyprint">reporter</code> is the <a href="#designated-reporter">Designated Reporter</a> (as opposed to the <a href="#first-public-reporter">First Public Reporter</a>), <code class="prettyprint">isDesignatedReporter</code> is set to true. The <code class="prettyprint">description</code> field can be used by <code class="prettyprint">reporter</code> to explain why they chose a specific Outcome.</td>
 <td>universe, reporter, market</td>
-<td>amountStaked, isDesignatedReporter, payoutNumerators</td>
+<td>amountStaked, isDesignatedReporter, payoutNumerators, description</td>
 </tr>
 <tr>
 <td><a name="InitialReporterTransferred"></a>InitialReporterTransferred</td>
@@ -14471,7 +14506,9 @@ Goals:
 
 <h2 id="dispute-round">Dispute Round</h2>
 
-<p>A Dispute Round is one 7-day round out of a maximum of 20 such rounds that can occur during the <a href="#dispute-round-phase">Dispute Round Phase</a> and before a <a href="#fork">Fork</a> occurs in a <a href="#market">Market</a>. During a Dispute Round, <a href="#rep">REP</a> holders who do not agree that the Market&rsquo;s <a href="#tentative-outcome">Tentative Outcome</a> is accurate can <a href="#dispute-stake">Stake</a> REP on a different <a href="#outcome">Outcome</a> in an attempt to <a href="#challenge">Challenge</a> it. If the Challenge is successful, the Tentative Outcome will be changed to the Outcome that was Staked on, or the Market will <a href="#fork">Fork</a> if a <a href="#dispute-bond">Dispute Bond</a> greater than the <a href="#fork-threshold">Fork Threshold</a> is filled.</p>
+<p>A Dispute Round is one round out of a maximum of 20 such rounds that can occur during the <a href="#dispute-round-phase">Dispute Round Phase</a> and before a <a href="#fork">Fork</a> occurs in a <a href="#market">Market</a>. During a Dispute Round, <a href="#rep">REP</a> holders who do not agree that the Market&rsquo;s <a href="#tentative-outcome">Tentative Outcome</a> is accurate can <a href="#dispute-stake">Stake</a> REP on a different <a href="#outcome">Outcome</a> in an attempt to <a href="#challenge">Challenge</a> it. If the Challenge is successful, the Tentative Outcome will be changed to the Outcome that was Staked on, or the Market will <a href="#fork">Fork</a> if a <a href="#dispute-bond">Dispute Bond</a> greater than the <a href="#fork-threshold">Fork Threshold</a> is filled. </p>
+
+<p>Early in the Dispute Round Phase, each Dispute Round will begin immediately after the previous one finishes. However, if a Market gets to the point where it only has 4 Dispute Rounds left before a Fork occurs, <a href="#dispute-pacing">Dispute Pacing</a> will begin, which will cause the next Dispute Round to wait until the current Fee Window is over before starting. Regardless of whether Dispute Pacing is in effect for the Market, the Market will not be able to be <a href="#finalized-market">Finalized</a> until the end of the Fee Window.</p>
 
 <h2 id="dispute-round-phase">Dispute Round Phase</h2>
 
@@ -14507,7 +14544,7 @@ Goals:
 
 <h2 id="final-outcome">Final Outcome</h2>
 
-<p>A Final Outcome is a <a href="#tentative-outcome">Tentative Outcome</a> that is not <a href="#challenge">Challenged</a> through a <a href="#dispute-round-phase">Dispute Round Phase</a> or is determined through a <a href="#fork">Fork</a>. At this point, the <a href="#market">Market</a> becomes <a href="#finalized-market">Finalized</a> and moves to the <a href="#finalized-phase">Finalized Phase</a>. A Market&rsquo;s Final Outcome cannot be challenged or changed.</p>
+<p>A Final Outcome is a <a href="#tentative-outcome">Tentative Outcome</a> that is not <a href="#challenge">Challenged</a> through a <a href="#dispute-round">Dispute Round</a> or is determined through a <a href="#fork">Fork</a>. At this point, the <a href="#market">Market</a> becomes <a href="#finalized-market">Finalized</a> and moves to the <a href="#finalized-phase">Finalized Phase</a>. (In the case where a Dispute Round went unchallenged, the Dispute Round&rsquo;s Fee Window must also be over before the Outcome becomes the Final Outcome.) A Market&rsquo;s Final Outcome cannot be challenged or changed.</p>
 
 <h2 id="finalized-market">Finalized Market</h2>
 
@@ -14756,7 +14793,7 @@ Note: When calculating the Payout Set for a Scalar Market using integer-only mat
 
 <h2 id="tentative-outcome">Tentative Outcome</h2>
 
-<p>The Tentative Outcome is the currently reported <a href="#outcome">Outcome</a> for a <a href="#market">Market</a> that has not been <a href="#finalized-market">Finalized</a> yet. In other words, it&rsquo;s either the Outcome that the <a href="#designated-reporter">Designated Reporter</a> or <a href="#first-public-reporter">First Public Reporter</a> has Staked <a href="#rep">REP</a> on, or it&rsquo;s the Outcome that had enough REP Staked on it in the last <a href="#dispute-round">Dispute Round</a> to <a href="#challenge">Challenge</a> the previous Tentative Outcome and make it the new Tentative Outcome. If a Market completes a <a href="#dispute-round">Dispute Round</a> without being Challenged, or if the Market passes through the <a href="#fork-period">Fork Phase</a>, then the Market will become <a href="#finalized-market">Finalized</a>, and the Tentative Outcome will become a <a href="#final-outcome">Final Outcome</a>.</p>
+<p>The Tentative Outcome is the currently reported <a href="#outcome">Outcome</a> for a <a href="#market">Market</a> that has not been <a href="#finalized-market">Finalized</a> yet. In other words, it&rsquo;s either the Outcome that the <a href="#designated-reporter">Designated Reporter</a> or <a href="#first-public-reporter">First Public Reporter</a> has Staked <a href="#rep">REP</a> on, or it&rsquo;s the Outcome that had enough REP Staked on it in the last <a href="#dispute-round">Dispute Round</a> to <a href="#challenge">Challenge</a> the previous Tentative Outcome and make it the new Tentative Outcome. If a Market completes a <a href="#dispute-round">Dispute Round</a> without being Challenged and the <a href="#fee-window">Fee Window</a> for that Dispute Round is over, or if the Market passes through the <a href="#fork-period">Fork Phase</a>, then the Market will become <a href="#finalized-market">Finalized</a>, and the Tentative Outcome will become a <a href="#final-outcome">Final Outcome</a>.</p>
 
 <h2 id="theoretical-rep-supply">Theoretical REP Supply</h2>
 
