@@ -103,7 +103,9 @@ The Dispute Pacing Threshold is the amount of [attoREP](#atto-prefix) that a [Ma
 
 ## Dispute Round
 
-A Dispute Round is one 7-day round out of a maximum of 20 such rounds that can occur during the [Dispute Round Phase](#dispute-round-phase) and before a [Fork](#fork) occurs in a [Market](#market). During a Dispute Round, [REP](#rep) holders who do not agree that the Market's [Tentative Outcome](#tentative-outcome) is accurate can [Stake](#dispute-stake) REP on a different [Outcome](#outcome) in an attempt to [Challenge](#challenge) it. If the Challenge is successful, the Tentative Outcome will be changed to the Outcome that was Staked on, or the Market will [Fork](#fork) if a [Dispute Bond](#dispute-bond) greater than the [Fork Threshold](#fork-threshold) is filled.
+A Dispute Round is one round out of a maximum of 20 such rounds that can occur during the [Dispute Round Phase](#dispute-round-phase) and before a [Fork](#fork) occurs in a [Market](#market). During a Dispute Round, [REP](#rep) holders who do not agree that the Market's [Tentative Outcome](#tentative-outcome) is accurate can [Stake](#dispute-stake) REP on a different [Outcome](#outcome) in an attempt to [Challenge](#challenge) it. If the Challenge is successful, the Tentative Outcome will be changed to the Outcome that was Staked on, or the Market will [Fork](#fork) if a [Dispute Bond](#dispute-bond) greater than the [Fork Threshold](#fork-threshold) is filled. 
+
+Early in the Dispute Round Phase, each Dispute Round will begin immediately after the previous one finishes. However, if a Market gets to the point where it only has 4 Dispute Rounds left before a Fork occurs, [Dispute Pacing](#dispute-pacing) will begin, which will cause the next Dispute Round to wait until the current Fee Window is over before starting. Regardless of whether Dispute Pacing is in effect for the Market, the Market will not be able to be [Finalized](#finalized-market) until the end of the Fee Window.
 
 ## Dispute Round Phase
 
@@ -139,7 +141,7 @@ Filling an [Order](#order) is when a [Filler](#order-filler) provides what the [
 
 ## Final Outcome
 
-A Final Outcome is a [Tentative Outcome](#tentative-outcome) that is not [Challenged](#challenge) through a [Dispute Round Phase](#dispute-round-phase) or is determined through a [Fork](#fork). At this point, the [Market](#market) becomes [Finalized](#finalized-market) and moves to the [Finalized Phase](#finalized-phase). A Market's Final Outcome cannot be challenged or changed.
+A Final Outcome is a [Tentative Outcome](#tentative-outcome) that is not [Challenged](#challenge) through a [Dispute Round](#dispute-round) or is determined through a [Fork](#fork). At this point, the [Market](#market) becomes [Finalized](#finalized-market) and moves to the [Finalized Phase](#finalized-phase). (In the case where a Dispute Round went unchallenged, the Dispute Round's Fee Window must also be over before the Outcome becomes the Final Outcome.) A Market's Final Outcome cannot be challenged or changed.
 
 ## Finalized Market
 
@@ -386,7 +388,7 @@ For more information on trading, please refer to the [Trading](#trading) section
 
 ## Tentative Outcome
 
-The Tentative Outcome is the currently reported [Outcome](#outcome) for a [Market](#market) that has not been [Finalized](#finalized-market) yet. In other words, it's either the Outcome that the [Designated Reporter](#designated-reporter) or [First Public Reporter](#first-public-reporter) has Staked [REP](#rep) on, or it's the Outcome that had enough REP Staked on it in the last [Dispute Round](#dispute-round) to [Challenge](#challenge) the previous Tentative Outcome and make it the new Tentative Outcome. If a Market completes a [Dispute Round](#dispute-round) without being Challenged, or if the Market passes through the [Fork Phase](#fork-period), then the Market will become [Finalized](#finalized-market), and the Tentative Outcome will become a [Final Outcome](#final-outcome).
+The Tentative Outcome is the currently reported [Outcome](#outcome) for a [Market](#market) that has not been [Finalized](#finalized-market) yet. In other words, it's either the Outcome that the [Designated Reporter](#designated-reporter) or [First Public Reporter](#first-public-reporter) has Staked [REP](#rep) on, or it's the Outcome that had enough REP Staked on it in the last [Dispute Round](#dispute-round) to [Challenge](#challenge) the previous Tentative Outcome and make it the new Tentative Outcome. If a Market completes a [Dispute Round](#dispute-round) without being Challenged and the [Fee Window](#fee-window) for that Dispute Round is over, or if the Market passes through the [Fork Phase](#fork-period), then the Market will become [Finalized](#finalized-market), and the Tentative Outcome will become a [Final Outcome](#final-outcome).
 
 ## Theoretical REP Supply
 

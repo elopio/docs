@@ -2663,7 +2663,7 @@ Returns the Ethereum contract address of the current running [Fee Window](#fee-w
 
 ### augur.api.Universe.getDisputeRoundDurationInSeconds(p, callback)
 
-Returns the number of seconds in a [Dispute Round](#dispute-round) within the specified [Universe](#universe).
+Returns the maximum number of seconds a [Dispute Round](#dispute-round) can last within the specified [Universe](#universe).
 
 #### **Parameters:**
 
@@ -2674,7 +2674,7 @@ Returns the number of seconds in a [Dispute Round](#dispute-round) within the sp
 
 #### **Returns:**
 
-* (string) Number of seconds in a Universe's Dispute Round, as a stringified unsigned integer.
+* (string) Maximum number of seconds in a Universe's Dispute Round, as a stringified unsigned integer.
 
 ### augur.api.Universe.getDisputeThresholdForDisputePacing(p, callback)
 
