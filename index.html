@@ -12270,8 +12270,6 @@ should lose all economic value, while any REP Staked on the Market’s true Outc
 </code></pre></div>
 <p>Provides JavaScript bindings for the <a href="https://github.com/AugurProject/augur-core/blob/master/source/contracts/reporting/Universe.sol">Universe Solidity Contract</a>, which allows for the creation of <a href="#market">Markets</a> and provides functions for obtaining information about a given <a href="#universe">Universe</a>.</p>
 
-<!-- #### Notes: Transaction will fail if: the sender does not have enough ETH/REP to pay for the [Validity Bond](#validity-bond) & [No-Show Bond](#no-show-bond), `p._endTime` has already passed, `p._feesPerEthInWei` is less than 0 or greater than/equal to 0.5 ETH (5 * 10^18), `p._designatedReporterAddress` is the null address (0x0000000000000000000000000000000000000000), the length of `p._description` is not greater than 0 bytes, `value` in the `tx` object is not enough to cover the Market's Validity Bond and the estimated gas cost for the target amount of reporters to report. -->
-
 <h3 id="augur-api-universe-createcategoricalmarket-p">augur.api.Universe.createCategoricalMarket(p)</h3>
 
 <p>Creates a new <a href="#categorical-market">Categorical Market</a>. This transaction will trigger a <a href="#MarketCreated"><code class="prettyprint">MarketCreated</code></a> event if the <a href="#market">Market</a> is created successfully. After the transaction has completed successfully, the Market address can be obtained by calling <code class="prettyprint">augur.createMarket.getMarketFromCreateMarketReceipt</code>.</p>
