@@ -1485,16 +1485,6 @@ should lose all economic value, while any REP Staked on the Market’s true Outc
 
 <p>Creates a <a href="#categorical-market">Categorical Market</a> in a specified <a href="#universe">Universe</a>. This function will trigger a <a href="#MarketCreated"><code class="prettyprint">MarketCreated</code></a> event and <a href="#TokensTransferred"><code class="prettyprint">TokensTransferred</code></a> event if the <a href="#market">Market</a> is created successfully.</p>
 
-<p>This transaction will fail if:</p>
-
-<ul>
-<li><code class="prettyprint">p._outcomes</code> contains fewer than 2 outcomes or more than 8 outcomes.</li>
-<li><code class="prettyprint">p._designatedReporterAddress</code> is set to the null address.</li>
-<li><code class="prettyprint">p._feePerEthInWei</code> is greater than the maximum fee (0.5 ETH).</li>
-<li><code class="prettyprint">p._endTime</code> has already passed.</li>
-<li>The Universe is Forking.</li>
-</ul>
-
 <p>NOTE: The account attempting to create the new market must have sufficient REP in order for the market to be created. This is also true when calling <code class="prettyprint">eth_estimateGas</code>, which essentially does a trial run of the transaction to determine what the gas cost would be to actually run it. </p>
 
 <h4 id="strong-strong"><strong>Parameters:</strong></h4>
@@ -1528,17 +1518,6 @@ should lose all economic value, while any REP Staked on the Market’s true Outc
 <h3 id="augur-createmarket-createscalarmarket-p">augur.createMarket.createScalarMarket(p)</h3>
 
 <p>Creates a <a href="#scalar-market">Scalar Market</a> in a specified <a href="#universe">Universe</a>. This function will trigger a <a href="#MarketCreated"><code class="prettyprint">MarketCreated</code></a> event and <a href="#TokensTransferred"><code class="prettyprint">TokensTransferred</code></a> event if the <a href="#market">Market</a> is created successfully.</p>
-
-<p>This transaction will fail if:</p>
-
-<ul>
-<li><code class="prettyprint">p._outcomes</code> contains fewer than 2 outcomes or more than 8 outcomes.</li>
-<li><code class="prettyprint">p._designatedReporterAddress</code> is set to the null address.</li>
-<li><code class="prettyprint">p._numTicks</code> is less than 2.</li>
-<li><code class="prettyprint">p._feePerEthInWei</code> is greater than the maximum fee (0.5 ETH).</li>
-<li><code class="prettyprint">p._endTime</code> has already passed.</li>
-<li>The Universe is Forking.</li>
-</ul>
 
 <p>NOTE: The account attempting to create the new market must have sufficient REP in order for the market to be created. This is also true when calling <code class="prettyprint">eth_estimateGas</code>, which essentially does a trial run of the transaction to determine what the gas cost would be to actually run it. </p>
 
@@ -1575,16 +1554,6 @@ should lose all economic value, while any REP Staked on the Market’s true Outc
 <h3 id="augur-createmarket-createyesnomarket-p">augur.createMarket.createYesNoMarket(p)</h3>
 
 <p>Creates a <a href="#yes-no-market">Yes/No Market</a> in a specified <a href="#universe">Universe</a>. This function will trigger a <a href="#MarketCreated"><code class="prettyprint">MarketCreated</code></a> event and <a href="#TokensTransferred"><code class="prettyprint">TokensTransferred</code></a> event if the <a href="#market">Market</a> is created successfully.</p>
-
-<p>This transaction will fail if:</p>
-
-<ul>
-<li><code class="prettyprint">p._outcomes</code> contains fewer than 2 outcomes or more than 8 outcomes.</li>
-<li><code class="prettyprint">p._designatedReporterAddress</code> is set to the null address.</li>
-<li><code class="prettyprint">p._feePerEthInWei</code> is greater than the maximum fee (0.5 ETH).</li>
-<li><code class="prettyprint">p._endTime</code> has already passed.</li>
-<li>The Universe is Forking.</li>
-</ul>
 
 <p>NOTE: The account attempting to create the new market must have sufficient REP in order for the market to be created. This is also true when calling <code class="prettyprint">eth_estimateGas</code>, which essentially does a trial run of the transaction to determine what the gas cost would be to actually run it.</p>
 
@@ -3262,24 +3231,77 @@ should lose all economic value, while any REP Staked on the Market’s true Outc
 
 <span class="nx">augur</span><span class="p">.</span><span class="nx">trading</span><span class="p">.</span><span class="nx">getUserTradingPositions</span><span class="p">({</span>
   <span class="na">account</span><span class="p">:</span> <span class="s2">"0x000000000000000000000000000000000000d00d"</span><span class="p">,</span>
-  <span class="na">marketId</span><span class="p">:</span> <span class="s2">"0x0000000000000000000000000000000000000ff1"</span><span class="p">,</span>
+  <span class="na">universe</span><span class="p">:</span> <span class="s2">"0x000000000000000000000000000000000000000b"</span><span class="p">,</span>
 <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">result</span><span class="p">)</span> <span class="p">{</span>
   <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">);</span>
 <span class="p">});</span>
 <span class="c1">// example output:</span>
 <span class="p">[</span>
   <span class="p">{</span>
-    <span class="na">averagePrice</span><span class="p">:</span> <span class="s2">"26.99662542182234436667"</span><span class="p">,</span>
-    <span class="na">cost</span><span class="p">:</span> <span class="s2">"0.00809898762654670331"</span><span class="p">,</span>
-    <span class="na">marketId</span><span class="p">:</span> <span class="s2">"0x0000000000000000000000000000000000000ff1"</span><span class="p">,</span>
-    <span class="na">netPosition</span><span class="p">:</span> <span class="s2">"-0.0003"</span><span class="p">,</span>
+    <span class="na">marketId</span><span class="p">:</span> <span class="s2">"0x0000000000000000000000000000000000000001"</span><span class="p">,</span>
+    <span class="na">outcome</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="na">numShares</span><span class="p">:</span> <span class="s2">"1.8"</span><span class="p">,</span>
+    <span class="na">numSharesAdjustedForUserIntention</span><span class="p">:</span> <span class="s2">"-1.8"</span><span class="p">,</span>
+    <span class="na">realizedProfitLoss</span><span class="p">:</span> <span class="s2">"-0.26"</span><span class="p">,</span>
+    <span class="na">unrealizedProfitLoss</span><span class="p">:</span> <span class="s2">"0"</span><span class="p">,</span>
+    <span class="na">averagePrice</span><span class="p">:</span> <span class="s2">"4.2"</span><span class="p">,</span>
+  <span class="p">},</span> <span class="p">{</span>
+    <span class="na">marketId</span><span class="p">:</span> <span class="s2">"0x0000000000000000000000000000000000000001"</span><span class="p">,</span>
     <span class="na">outcome</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
-    <span class="na">position</span><span class="p">:</span> <span class="s2">"0"</span><span class="p">,</span>
-    <span class="na">realized</span><span class="p">:</span> <span class="s2">"54999999999.56442531007152770894"</span><span class="p">,</span>
-    <span class="na">timestamp</span><span class="p">:</span> <span class="mi">1534435013</span><span class="p">,</span>
-    <span class="na">total</span><span class="p">:</span> <span class="s2">"54999999999.56442531007152770894"</span><span class="p">,</span>
-    <span class="na">unrealized</span><span class="p">:</span> <span class="s2">"0"</span><span class="p">,</span>
-  <span class="p">},</span>
+    <span class="na">numShares</span><span class="p">:</span> <span class="s2">"0"</span><span class="p">,</span>
+    <span class="na">numSharesAdjustedForUserIntention</span><span class="p">:</span> <span class="s2">"0"</span><span class="p">,</span>
+    <span class="na">realizedProfitLoss</span><span class="p">:</span> <span class="s2">"0"</span><span class="p">,</span>
+    <span class="na">unrealizedProfitLoss</span><span class="p">:</span> <span class="s2">"0"</span><span class="p">,</span>
+    <span class="na">averagePrice</span><span class="p">:</span> <span class="s2">"0"</span><span class="p">,</span>
+  <span class="p">},</span> <span class="p">{</span>
+    <span class="na">marketId</span><span class="p">:</span> <span class="s2">"0x0000000000000000000000000000000000000001"</span><span class="p">,</span>
+    <span class="na">outcome</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+    <span class="na">numShares</span><span class="p">:</span> <span class="s2">"0"</span><span class="p">,</span>
+    <span class="na">numSharesAdjustedForUserIntention</span><span class="p">:</span> <span class="s2">"0"</span><span class="p">,</span>
+    <span class="na">realizedProfitLoss</span><span class="p">:</span> <span class="s2">"0"</span><span class="p">,</span>
+    <span class="na">unrealizedProfitLoss</span><span class="p">:</span> <span class="s2">"0"</span><span class="p">,</span>
+    <span class="na">averagePrice</span><span class="p">:</span> <span class="s2">"0"</span><span class="p">,</span>
+  <span class="p">},</span> <span class="p">{</span>
+    <span class="na">marketId</span><span class="p">:</span> <span class="s2">"0x0000000000000000000000000000000000000001"</span><span class="p">,</span>
+    <span class="na">outcome</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span>
+    <span class="na">numShares</span><span class="p">:</span> <span class="s2">"0"</span><span class="p">,</span>
+    <span class="na">numSharesAdjustedForUserIntention</span><span class="p">:</span> <span class="s2">"0"</span><span class="p">,</span>
+    <span class="na">realizedProfitLoss</span><span class="p">:</span> <span class="s2">"0"</span><span class="p">,</span>
+    <span class="na">unrealizedProfitLoss</span><span class="p">:</span> <span class="s2">"0"</span><span class="p">,</span>
+    <span class="na">averagePrice</span><span class="p">:</span> <span class="s2">"0"</span><span class="p">,</span>
+  <span class="p">},</span> <span class="p">{</span>
+    <span class="na">marketId</span><span class="p">:</span> <span class="s2">"0x0000000000000000000000000000000000000001"</span><span class="p">,</span>
+    <span class="na">outcome</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span>
+    <span class="na">numShares</span><span class="p">:</span> <span class="s2">"0"</span><span class="p">,</span>
+    <span class="na">numSharesAdjustedForUserIntention</span><span class="p">:</span> <span class="s2">"0"</span><span class="p">,</span>
+    <span class="na">realizedProfitLoss</span><span class="p">:</span> <span class="s2">"0"</span><span class="p">,</span>
+    <span class="na">unrealizedProfitLoss</span><span class="p">:</span> <span class="s2">"0"</span><span class="p">,</span>
+    <span class="na">averagePrice</span><span class="p">:</span> <span class="s2">"0"</span><span class="p">,</span>
+  <span class="p">},</span> <span class="p">{</span>
+    <span class="na">marketId</span><span class="p">:</span> <span class="s2">"0x0000000000000000000000000000000000000001"</span><span class="p">,</span>
+    <span class="na">outcome</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span>
+    <span class="na">numShares</span><span class="p">:</span> <span class="s2">"0"</span><span class="p">,</span>
+    <span class="na">numSharesAdjustedForUserIntention</span><span class="p">:</span> <span class="s2">"0"</span><span class="p">,</span>
+    <span class="na">realizedProfitLoss</span><span class="p">:</span> <span class="s2">"0"</span><span class="p">,</span>
+    <span class="na">unrealizedProfitLoss</span><span class="p">:</span> <span class="s2">"0"</span><span class="p">,</span>
+    <span class="na">averagePrice</span><span class="p">:</span> <span class="s2">"0"</span><span class="p">,</span>
+  <span class="p">},</span> <span class="p">{</span>
+    <span class="na">marketId</span><span class="p">:</span> <span class="s2">"0x0000000000000000000000000000000000000001"</span><span class="p">,</span>
+    <span class="na">outcome</span><span class="p">:</span> <span class="mi">6</span><span class="p">,</span>
+    <span class="na">numShares</span><span class="p">:</span> <span class="s2">"0"</span><span class="p">,</span>
+    <span class="na">numSharesAdjustedForUserIntention</span><span class="p">:</span> <span class="s2">"0"</span><span class="p">,</span>
+    <span class="na">realizedProfitLoss</span><span class="p">:</span> <span class="s2">"0"</span><span class="p">,</span>
+    <span class="na">unrealizedProfitLoss</span><span class="p">:</span> <span class="s2">"0"</span><span class="p">,</span>
+    <span class="na">averagePrice</span><span class="p">:</span> <span class="s2">"0"</span><span class="p">,</span>
+  <span class="p">},</span> <span class="p">{</span>
+    <span class="na">marketId</span><span class="p">:</span> <span class="s2">"0x0000000000000000000000000000000000000001"</span><span class="p">,</span>
+    <span class="na">outcome</span><span class="p">:</span> <span class="mi">7</span><span class="p">,</span>
+    <span class="na">numShares</span><span class="p">:</span> <span class="s2">"0"</span><span class="p">,</span>
+    <span class="na">numSharesAdjustedForUserIntention</span><span class="p">:</span> <span class="s2">"0"</span><span class="p">,</span>
+    <span class="na">realizedProfitLoss</span><span class="p">:</span> <span class="s2">"0"</span><span class="p">,</span>
+    <span class="na">unrealizedProfitLoss</span><span class="p">:</span> <span class="s2">"0"</span><span class="p">,</span>
+    <span class="na">averagePrice</span><span class="p">:</span> <span class="s2">"0"</span><span class="p">,</span>
+  <span class="p">}</span>
 <span class="p">]</span>
 
 <span class="nx">augur</span><span class="p">.</span><span class="nx">trading</span><span class="p">.</span><span class="nx">normalizePrice</span><span class="p">({</span>
@@ -14161,16 +14183,13 @@ should lose all economic value, while any REP Staked on the Market’s true Outc
 <h4 id="strong-strong"><strong>Properties:</strong></h4>
 
 <ul>
-<li><strong><code class="prettyprint">averagePrice</code></strong> (string) Average price paid to acquire this position, in ETH.</li>
-<li><strong><code class="prettyprint">cost</code></strong> (string) Cost per Share to acquire this position, in ETH.</li>
 <li><strong><code class="prettyprint">marketId</code></strong> (string) Contract address of the Market, as a hexadecimal string.</li>
-<li><strong><code class="prettyprint">netPosition</code></strong> (string) Number of virtual Shares the user owns (when short on <code class="prettyprint">outcome</code>).</li>
-<li><strong><code class="prettyprint">outcome</code></strong> (number) Outcome of the Shares the user owns.</li>
-<li><strong><code class="prettyprint">position</code></strong> (string) Number of Shares of <code class="prettyprint">outcome</code> that the user holds.</li>
-<li><strong><code class="prettyprint">realized</code></strong> (string) ETH profit or loss the user took upon closing this position.</li>
-<li><strong><code class="prettyprint">timestamp</code></strong> (number) Unix timestamp when user&rsquo;s trade position last changed. (If the user has no position, this is the current block time.)</li>
-<li><strong><code class="prettyprint">total</code></strong> (string) The sum of <code class="prettyprint">realized</code> and <code class="prettyprint">unrealized</code>.</li>
-<li><strong><code class="prettyprint">unrealized</code></strong> (string) Profit or loss the user would take if they closed their position at the last trade price, in ETH.</li>
+<li><strong><code class="prettyprint">outcome</code></strong> (number) Outcome of the shares the user owns.</li>
+<li><strong><code class="prettyprint">numShares</code></strong> (string) Quantity of shares currently owned by the user.</li>
+<li><strong><code class="prettyprint">numSharesAdjustedForUserIntention</code></strong> (string) Similar to numShares, but Short Positions are shown as negative for Yes/No and Scalar Markets.</li>
+<li><strong><code class="prettyprint">realizedProfitLoss</code></strong> (string) AttoETH profit or loss the user took upon closing this position.</li>
+<li><strong><code class="prettyprint">unrealizedProfitLoss</code></strong> (string) AttoETH profit or loss the user would take if they closed their position at the last trade price.</li>
+<li><strong><code class="prettyprint">averagePrice</code></strong> (string) Average price in attoETH paid to acquire this position.</li>
 </ul>
 
 <p><a name="WebSocket"></a></p>
@@ -14818,6 +14837,12 @@ Goals:
 
 <p>A Designated Report occurs when a <a href="#designated-reporter">Designated Reporter</a> <a href="#designated-reporter-stake">Stakes</a> <a href="#rep">REP</a> on a particular <a href="#outcome">Outcome</a> in a <a href="#market">Market</a>. This Outcome then becomes the <a href="#tentative-outcome">Tentative Outcome</a> for the Market, and the Market changes to the <a href="#waiting-for-the-next-fee Window to Begin Phase">Waiting for the Next Fee Window to Begin Phase</a>. </p>
 
+<h2 id="no-show-bond">No-Show Bond</h2>
+
+<p>The No-Show Bond is paid for using <a href="#rep">REP</a> by the <a href="#market-creator">Market Creator</a> during <a href="#market">Market</a> creation. If the <a href="#designed-reporter">Designated Reporter</a> submits a <a href="#report">Report</a> during the <a href="#designated-reporting-phase">Designated Reporting Phase</a>, the Bond is refunded to the Market Creator. If the Designated Reporter fails to Report during the Designated Reporting Phase, then the No-Show Bond is applied as Stake on the <a href="#tentative-outcome">Tentative Outcome</a> Reported by the <a href="#first-public-reporter">First Public Reporter</a>. If the Tentative Outcome selected by the First Public Reporter becomes the <a href="#final-outcome">Final Outcome</a> of the Market, the First Public Reporter receives the No-Show Bond. If the Tentative Outcome selected by the First Public Reporter is <a href="#disputed">Disputed</a> and then still becomes the <a href="#final-outcome">Final Outcome</a> of the Market, the First Public Reporter receives the No-Show Bond plus an additional 50% of the Bond amount. This actually allows for someone to stake 0 REP for the <a href="#first-public-report">First Public Report</a> because the Bond is added to whatever is staked. This means someone without any REP has the potential to Report and if the Market is eventually <a href="#finalized-market">Finalized</a> the way that person Reported, then they can earn REP without having to purchase any. (Note that they will have to pay the gas cost to submit the Report.)</p>
+
+<p>During the very first <a href="#fee-window">Fee Window</a> after launch, the No-Show Bond will be set at 0.35 REP. As with the <a href="#validity-bond">Validity Bond</a>, the No-Show Bond is adjusted up or down, targeting a 1% no-show rate with a floor of 0.35 REP. Specifically, we let ρ be the proportion of Markets in the previous Fee Window whose Designated Reporters failed to Report on time, and we let b<sub>r</sub> be amount of the No-Show Bond from the previous Fee Window. Then the amount of the No-Show Bond for the current Fee Window is max &#123;0.35, b<sub>r</sub>f(ρ)&#125;.</p>
+
 <h2 id="designated-reporter">Designated Reporter</h2>
 
 <p>A Designated Reporter is a single Ethereum address designated to submit the <a href="#tentative-outcome">Tentative Outcome</a> for a <a href="#market">Market</a> during the <a href="#designated-reporting-phase">Designated Reporting Phase</a>. The Designated Reporter is set by the <a href="#market-creator">Market Creator</a> during Market creation. All Markets must have a Designated Reporter.</p>
@@ -14985,12 +15010,6 @@ Goals:
 <h2 id="minimum-display-price">Minimum Display Price</h2>
 
 <p>The Minimum Display Price (often seen as <code class="prettyprint">minDisplayPrice</code>) is the minimum price allowed for a <a href="#share">Share</a> on a <a href="#market">Market</a>. For <a href="#yes-no-market">Yes/No</a> or <a href="#categorical-market">Categorical</a> Markets this value is always 0, as in 0 ETH. <a href="#scalar-market">Scalar</a> Markets&rsquo; Minimum Display Price would be the bottom end of the range set by the <a href="#market-creator">Market Creator</a>.</p>
-
-<h2 id="no-show-bond">No-Show Bond</h2>
-
-<p>The No-Show Bond is paid for using <a href="#rep">REP</a> by the <a href="#market-creator">Market Creator</a> during <a href="#market">Market</a> creation. If the <a href="#designed-reporter">Designated Reporter</a> submits a <a href="#report">Report</a> during the <a href="#designated-reporting-phase">Designated Reporting Phase</a>, the Bond is refunded to the Market Creator. If the Designated Reporter fails to Report during the Designated Reporting Phase, then the No-Show Bond is applied as Stake on the <a href="#tentative-outcome">Tentative Outcome</a> Reported by the <a href="#first-public-reporter">First Public Reporter</a>. If the Tentative Outcome selected by the First Public Reporter becomes the <a href="#final-outcome">Final Outcome</a> of the Market, the First Public Reporter receives the No-Show Bond. If the Tentative Outcome selected by the First Public Reporter is <a href="#disputed">Disputed</a> and then still becomes the <a href="#final-outcome">Final Outcome</a> of the Market, the First Public Reporter receives the No-Show Bond plus an additional 50% of the Bond amount. This actually allows for someone to stake 0 REP for the <a href="#first-public-report">First Public Report</a> because the Bond is added to whatever is staked. This means someone without any REP has the potential to Report and if the Market is eventually <a href="#finalized-market">Finalized</a> the way that person Reported, then they can earn REP without having to purchase any. (Note that they will have to pay the gas cost to submit the Report.)</p>
-
-<p>During the very first <a href="#fee-window">Fee Window</a> after launch, the No-Show Bond will be set at 0.35 REP. As with the <a href="#validity-bond">Validity Bond</a>, the No-Show Bond is adjusted up or down, targeting a 1% no-show rate with a floor of 0.35 REP. Specifically, we let ρ be the proportion of Markets in the previous Fee Window whose Designated Reporters failed to Report on time, and we let b<sub>r</sub> be amount of the No-Show Bond from the previous Fee Window. Then the amount of the No-Show Bond for the current Fee Window is max &#123;0.35, b<sub>r</sub>f(ρ)&#125;.</p>
 
 <h2 id="number-of-ticks">Number of Ticks</h2>
 
