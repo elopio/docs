@@ -5915,7 +5915,7 @@ should lose all economic value, while any REP Staked on the Market’s true Outc
 <h4 id="strong-strong"><strong>Returns:</strong></h4>
 
 <ul>
-<li>(number) Unix timestamp at which the Market&rsquo;s Designated Reporting Phase ends, as a stringified unsigned integer.</li>
+<li>(string) Unix timestamp at which the Market&rsquo;s Designated Reporting Phase ends, as a stringified unsigned integer.</li>
 </ul>
 
 <h3 id="augur-api-market-getdisputepacingon-p-callback">augur.api.Market.getDisputePacingOn(p, callback)</h3>
@@ -9194,12 +9194,13 @@ should lose all economic value, while any REP Staked on the Market’s true Outc
 <span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">CreateOrder</span><span class="p">.</span><span class="nx">publicCreateOrder</span><span class="p">({</span>
   <span class="na">_type</span><span class="p">:</span> <span class="s2">"0x0"</span><span class="p">,</span>
   <span class="na">_attoshares</span><span class="p">:</span> <span class="s2">"0x5af3107a4000"</span><span class="p">,</span>
-  <span class="na">_displayPrice</span><span class="p">:</span> <span class="s2">"0x64"</span><span class="p">,</span>
+  <span class="na">_price</span><span class="p">:</span> <span class="s2">"0x64"</span><span class="p">,</span>
   <span class="na">_market</span><span class="p">:</span> <span class="s2">"0xc4ba20cbafe3a3655a2f2e4df4ac7f942a722017"</span><span class="p">,</span>
   <span class="na">_outcome</span><span class="p">:</span> <span class="s2">"0x0"</span><span class="p">,</span>
   <span class="na">_betterOrderId</span><span class="p">:</span> <span class="nx">_betterOrderId</span><span class="p">,</span>
   <span class="na">_worseOrderId</span><span class="p">:</span> <span class="nx">_worseOrderId</span><span class="p">,</span>
   <span class="na">_tradeGroupId</span><span class="p">:</span> <span class="s2">"0x0000000000000000000000000000000000000000000000000000000000000000"</span><span class="p">,</span>
+  <span class="na">_ignoreShares</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
   <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> 
     <span class="na">to</span><span class="p">:</span> <span class="nx">createOrderAddress</span><span class="p">,</span>
     <span class="na">value</span><span class="p">:</span> <span class="s2">"0x470de4df820000"</span><span class="p">,</span> 
@@ -9218,7 +9219,7 @@ should lose all economic value, while any REP Staked on the Market’s true Outc
 
 <h3 id="augur-api-createorder-publiccreateorder-p">augur.api.CreateOrder.publicCreateOrder(p)</h3>
 
-<p>Creates a new <a href="#bid-order">Bid Order</a> or <a href="#ask-order">Ask Order</a> on the <a href="#order-book">Order Book</a>. The parameters <code class="prettyprint">p._betterOrderId</code> and <code class="prettyprint">p._worseOrderId</code> are the <a href="#order">Orders</a> with the next best/next worse price after <code class="prettyprint">p._displayPrice</code>, and they are used to optimize the process of sorting the new Order on the Order Book. Their IDs can be obtained by calling <code class="prettyprint">augur.trading.getBetterWorseOrders</code>. This transaction will trigger an <a href="#OrderCreated"><code class="prettyprint">OrderCreated</code></a> event if the Order is created without any errors.</p>
+<p>Creates a new <a href="#bid-order">Bid Order</a> or <a href="#ask-order">Ask Order</a> on the <a href="#order-book">Order Book</a>. The parameters <code class="prettyprint">p._betterOrderId</code> and <code class="prettyprint">p._worseOrderId</code> are the <a href="#order">Orders</a> with the next best/next worse price after <code class="prettyprint">p._price</code>, and they are used to optimize the process of sorting the new Order on the Order Book. Their IDs can be obtained by calling <code class="prettyprint">augur.trading.getBetterWorseOrders</code>. This transaction will trigger an <a href="#OrderCreated"><code class="prettyprint">OrderCreated</code></a> event if the Order is created without any errors.</p>
 
 <p>This transaction will fail if:</p>
 
@@ -9227,7 +9228,7 @@ should lose all economic value, while any REP Staked on the Market’s true Outc
 <li><code class="prettyprint">p._attoshares</code> is less than 0.</li>
 <li><code class="prettyprint">p._market</code> is undefined.</li>
 <li><code class="prettyprint">p._outcome</code> is less than 0 or greater than the total number of Outcomes for <code class="prettyprint">p._market</code>.</li>
-<li><code class="prettyprint">p._displayPrice</code> is below the <code class="prettyprint">p._market</code>&rsquo;s <a href="#minimum-display-price">Minimum Display Price</a> or above the <code class="prettyprint">market</code>&rsquo;s <a href="#maximum-display-price">Maximum Display Price</a>.</li>
+<li><code class="prettyprint">p._price</code> is below the <code class="prettyprint">p._market</code>&rsquo;s <a href="#minimum-display-price">Minimum Display Price</a> or above the <code class="prettyprint">market</code>&rsquo;s <a href="#maximum-display-price">Maximum Display Price</a>.</li>
 </ul>
 
 <h4 id="strong-strong"><strong>Parameters:</strong></h4>
@@ -9238,12 +9239,13 @@ should lose all economic value, while any REP Staked on the Market’s true Outc
 <ul>
 <li><strong><code class="prettyprint">p._type</code></strong> (string) Type of Order to create, as a hexadecimal string (&ldquo;0x0&rdquo; for a <a href="#bid-order">Bid Order</a>, &ldquo;0x1&rdquo; for an <a href="#ask-order">Ask Order</a>).</li>
 <li><strong><code class="prettyprint">p._attoshares</code></strong> (string) Number of <a href="#share-unit">Share Units</a> to buy or sell, as a hexadecimal string.</li>
-<li><strong><code class="prettyprint">p._displayPrice</code></strong> (string) Desired price at which to purchase Shares, in <a href="#atto-prefix">attoETH</a>.</li>
+<li><strong><code class="prettyprint">p._price</code></strong> (string) Desired price at which to purchase Shares, in <a href="#atto-prefix">attoETH</a>.</li>
 <li><strong><code class="prettyprint">p._market</code></strong> (string) Market contract address in which to place the Order, as a 20-byte hexadecimal value.</li>
 <li><strong><code class="prettyprint">p._outcome</code></strong> (string) Outcome for which to place the Order, as a hexadecimal string.</li>
 <li><strong><code class="prettyprint">p._betterOrderId</code></strong> (string) Order ID of an existing Order on the Order Book with the next-best price with respect to the Order this transaction is intending to create, as a 32-byte hexadecimal value. The Order ID for <code class="prettyprint">p._betterOrderId</code> can be obtained by calling <code class="prettyprint">augur.trading.getBetterWorseOrders</code>.</li>
 <li><strong><code class="prettyprint">p._worseOrderId</code></strong> (string) Order ID of an existing Order on the Order Book with the next-worse price with respect to the Order this transaction is intending to create, as a 32-byte hexadecimal value. The Order ID for <code class="prettyprint">p._worseOrderId</code> can be obtained by calling <code class="prettyprint">augur.trading.getBetterWorseOrders</code>.</li>
 <li><strong><code class="prettyprint">p._tradeGroupId</code></strong> (string) &lt;optional&gt; ID used by the Augur UI to group transactions, as a 32-byte hexadecimal value. (Can be <code class="prettyprint">undefined</code>.)</li>
+<li><strong><code class="prettyprint">p._ignoreShares</code></strong> (boolean) Whether to ignore the creator&rsquo;s owned Shares when creating the Order.</li>
 <li><strong><code class="prettyprint">p.tx</code></strong> (Object) Object containing details about how this transaction should be made.
 
 <ul>
@@ -9525,6 +9527,7 @@ should lose all economic value, while any REP Staked on the Market’s true Outc
   <span class="na">_orderId</span><span class="p">:</span> <span class="nx">_orderId</span><span class="p">,</span>
   <span class="na">_amountFillerWants</span><span class="p">:</span> <span class="nx">_amountFillerWants</span><span class="p">,</span>
   <span class="na">_tradeGroupId</span><span class="p">:</span> <span class="nx">_tradeGroupId</span><span class="p">,</span>
+  <span class="na">_ignoreShares</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
   <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> 
     <span class="na">to</span><span class="p">:</span> <span class="nx">fillOrderAddress</span><span class="p">,</span>
     <span class="na">value</span><span class="p">:</span> <span class="s2">"0x16345785d8a0000"</span><span class="p">,</span> 
@@ -9562,6 +9565,7 @@ should lose all economic value, while any REP Staked on the Market’s true Outc
 <li><strong><code class="prettyprint">p._orderId</code></strong> (string) Ethereum address of an Order on the Order Book, as a 32-byte hexadecimal value.</li>
 <li><strong><code class="prettyprint">p._amountFillerWants</code></strong> (string) Number of <a href="#share">Shares</a> to Fill, as a hexadecimal string.</li>
 <li><strong><code class="prettyprint">p._tradeGroupId</code></strong> (string) &lt;optional&gt; ID used by the Augur UI to group transactions, as a 32-byte hexadecimal value. (Can be <code class="prettyprint">undefined</code>.)</li>
+<li><strong><code class="prettyprint">p._ignoreShares</code></strong> (boolean) Whether to ignore the filler&rsquo;s owned Shares when filling the Order.</li>
 <li><strong><code class="prettyprint">p.tx</code></strong> (Object) Object containing details about how this transaction should be made.
 
 <ul>
@@ -10133,7 +10137,7 @@ should lose all economic value, while any REP Staked on the Market’s true Outc
 <ul>
 <li><strong><code class="prettyprint">p._payoutNumerators</code></strong>  (Array.&lt;number&gt;|Array.&lt;string&gt;) Array representing the Market&rsquo;s Payout Set.</li>
 <li><strong><code class="prettyprint">p._invalid</code></strong>  (boolean) Whether the Outcome of the Market is Invalid.</li>
-<li><strong><code class="prettyprint">p._description</code></strong> (string) &lt;optional&gt; Explanation for why the contributor is Staking on this particular Outcome.</li>
+<li><strong><code class="prettyprint">p._description</code></strong> (string) &lt;optional&gt; Explanation for why the Initial Reporter is Staking on this particular Outcome.</li>
 <li><strong><code class="prettyprint">p.tx</code></strong> (Object) Object containing details about how this transaction should be made.
 
 <ul>
@@ -11100,7 +11104,7 @@ should lose all economic value, while any REP Staked on the Market’s true Outc
 
 <span class="kd">var</span> <span class="nx">_market</span> <span class="o">=</span> <span class="s2">"0x7e8e07364ccde43ba5159537404924e86ca53c92"</span><span class="p">;</span>
 <span class="kd">var</span> <span class="nx">_outcome</span> <span class="o">=</span> <span class="s2">"0x1"</span><span class="p">;</span>
-<span class="kd">var</span> <span class="nx">_fxpAmount</span> <span class="o">=</span> <span class="s2">"0x8ac7230489e80000"</span><span class="p">;</span> <span class="c1">// 10.0</span>
+<span class="kd">var</span> <span class="nx">_amount</span> <span class="o">=</span> <span class="s2">"0x8ac7230489e80000"</span><span class="p">;</span> <span class="c1">// 10.0</span>
 <span class="kd">var</span> <span class="nx">_price</span> <span class="o">=</span> <span class="s2">"0x6f05b59d3b20000"</span><span class="p">;</span> <span class="c1">// 0.5</span>
 <span class="kd">var</span> <span class="nx">_betterOrderId</span> <span class="o">=</span> <span class="s2">"0xea2c7476e61f5e2625e57df17fcce74741d3c2004ac657675f686a23d06e6091"</span><span class="p">;</span>
 <span class="kd">var</span> <span class="nx">_worseOrderId</span> <span class="o">=</span> <span class="s2">"0xed42c0fab97ee6fbde7c47dc62dc3ad09e8d3af53517245c77c659f7cd561426"</span><span class="p">;</span>
@@ -11109,7 +11113,7 @@ should lose all economic value, while any REP Staked on the Market’s true Outc
 <span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">Trade</span><span class="p">.</span><span class="nx">publicBuy</span><span class="p">({</span>
   <span class="na">_market</span><span class="p">:</span> <span class="nx">_market</span><span class="p">,</span>
   <span class="na">_outcome</span><span class="p">:</span> <span class="nx">_outcome</span><span class="p">,</span>
-  <span class="na">_fxpAmount</span><span class="p">:</span> <span class="nx">_fxpAmount</span><span class="p">,</span>
+  <span class="na">_amount</span><span class="p">:</span> <span class="nx">_amount</span><span class="p">,</span>
   <span class="na">_price</span><span class="p">:</span> <span class="nx">_price</span><span class="p">,</span>
   <span class="na">_betterOrderId</span><span class="p">:</span> <span class="nx">_betterOrderId</span><span class="p">,</span>
   <span class="na">_worseOrderId</span><span class="p">:</span> <span class="nx">_worseOrderId</span><span class="p">,</span>
@@ -11132,7 +11136,7 @@ should lose all economic value, while any REP Staked on the Market’s true Outc
 <span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">Trade</span><span class="p">.</span><span class="nx">publicBuyWithLimit</span><span class="p">({</span>
   <span class="na">_market</span><span class="p">:</span> <span class="nx">_market</span><span class="p">,</span>
   <span class="na">_outcome</span><span class="p">:</span> <span class="nx">_outcome</span><span class="p">,</span>
-  <span class="na">_fxpAmount</span><span class="p">:</span> <span class="nx">_fxpAmount</span><span class="p">,</span>
+  <span class="na">_amount</span><span class="p">:</span> <span class="nx">_amount</span><span class="p">,</span>
   <span class="na">_price</span><span class="p">:</span> <span class="nx">_price</span><span class="p">,</span>
   <span class="na">_betterOrderId</span><span class="p">:</span> <span class="nx">_betterOrderId</span><span class="p">,</span>
   <span class="na">_worseOrderId</span><span class="p">:</span> <span class="nx">_worseOrderId</span><span class="p">,</span>
@@ -11156,7 +11160,7 @@ should lose all economic value, while any REP Staked on the Market’s true Outc
 <span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">Trade</span><span class="p">.</span><span class="nx">publicSell</span><span class="p">({</span>
   <span class="na">_market</span><span class="p">:</span> <span class="nx">_market</span><span class="p">,</span>
   <span class="na">_outcome</span><span class="p">:</span> <span class="nx">_outcome</span><span class="p">,</span>
-  <span class="na">_fxpAmount</span><span class="p">:</span> <span class="nx">_fxpAmount</span><span class="p">,</span>
+  <span class="na">_amount</span><span class="p">:</span> <span class="nx">_amount</span><span class="p">,</span>
   <span class="na">_price</span><span class="p">:</span> <span class="nx">_price</span><span class="p">,</span>
   <span class="na">_betterOrderId</span><span class="p">:</span> <span class="nx">_betterOrderId</span><span class="p">,</span>
   <span class="na">_worseOrderId</span><span class="p">:</span> <span class="nx">_worseOrderId</span><span class="p">,</span>
@@ -11179,7 +11183,7 @@ should lose all economic value, while any REP Staked on the Market’s true Outc
 <span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">Trade</span><span class="p">.</span><span class="nx">publicSellWithLimit</span><span class="p">({</span>
   <span class="na">_market</span><span class="p">:</span> <span class="nx">_market</span><span class="p">,</span>
   <span class="na">_outcome</span><span class="p">:</span> <span class="nx">_outcome</span><span class="p">,</span>
-  <span class="na">_fxpAmount</span><span class="p">:</span> <span class="nx">_fxpAmount</span><span class="p">,</span>
+  <span class="na">_amount</span><span class="p">:</span> <span class="nx">_amount</span><span class="p">,</span>
   <span class="na">_price</span><span class="p">:</span> <span class="nx">_price</span><span class="p">,</span>
   <span class="na">_betterOrderId</span><span class="p">:</span> <span class="nx">_betterOrderId</span><span class="p">,</span>
   <span class="na">_worseOrderId</span><span class="p">:</span> <span class="nx">_worseOrderId</span><span class="p">,</span>
@@ -11204,7 +11208,7 @@ should lose all economic value, while any REP Staked on the Market’s true Outc
   <span class="na">_direction</span><span class="p">:</span> <span class="s2">"0x0"</span><span class="p">,</span>
   <span class="na">_market</span><span class="p">:</span> <span class="nx">_market</span><span class="p">,</span>
   <span class="na">_outcome</span><span class="p">:</span> <span class="nx">_outcome</span><span class="p">,</span>
-  <span class="na">_fxpAmount</span><span class="p">:</span> <span class="nx">_fxpAmount</span><span class="p">,</span>
+  <span class="na">_amount</span><span class="p">:</span> <span class="nx">_amount</span><span class="p">,</span>
   <span class="na">_price</span><span class="p">:</span> <span class="nx">_price</span><span class="p">,</span>
   <span class="na">_betterOrderId</span><span class="p">:</span> <span class="nx">_betterOrderId</span><span class="p">,</span>
   <span class="na">_worseOrderId</span><span class="p">:</span> <span class="nx">_worseOrderId</span><span class="p">,</span>
@@ -11224,11 +11228,11 @@ should lose all economic value, while any REP Staked on the Market’s true Outc
   <span class="na">onFailed</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">);</span> <span class="p">}</span>
 <span class="p">});</span>
 
-<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">Trade</span><span class="p">.</span><span class="nx">publicTradeWithLimit</span><span class="p">({</span>
+<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">Trade</span><span class="p">.</span><span class="nx">publicTradeWithTotalCost</span><span class="p">({</span>
   <span class="na">_direction</span><span class="p">:</span> <span class="s2">"0x0"</span><span class="p">,</span>
   <span class="na">_market</span><span class="p">:</span> <span class="nx">_market</span><span class="p">,</span>
   <span class="na">_outcome</span><span class="p">:</span> <span class="nx">_outcome</span><span class="p">,</span>
-  <span class="na">_fxpAmount</span><span class="p">:</span> <span class="nx">_fxpAmount</span><span class="p">,</span>
+  <span class="na">_totalCost_</span><span class="p">:</span> <span class="nx">_totalCost</span><span class="p">,</span>
   <span class="na">_price</span><span class="p">:</span> <span class="nx">_price</span><span class="p">,</span>
   <span class="na">_betterOrderId</span><span class="p">:</span> <span class="nx">_betterOrderId</span><span class="p">,</span>
   <span class="na">_worseOrderId</span><span class="p">:</span> <span class="nx">_worseOrderId</span><span class="p">,</span>
@@ -11253,7 +11257,7 @@ should lose all economic value, while any REP Staked on the Market’s true Outc
   <span class="na">_direction</span><span class="p">:</span> <span class="s2">"0x1"</span><span class="p">,</span>
   <span class="na">_market</span><span class="p">:</span> <span class="nx">_market</span><span class="p">,</span>
   <span class="na">_outcome</span><span class="p">:</span> <span class="nx">_outcome</span><span class="p">,</span>
-  <span class="na">_fxpAmount</span><span class="p">:</span> <span class="nx">_fxpAmount</span><span class="p">,</span>
+  <span class="na">_amount</span><span class="p">:</span> <span class="nx">_amount</span><span class="p">,</span>
   <span class="na">_price</span><span class="p">:</span> <span class="nx">_price</span><span class="p">,</span>
   <span class="na">_betterOrderId</span><span class="p">:</span> <span class="nx">_betterOrderId</span><span class="p">,</span>
   <span class="na">_worseOrderId</span><span class="p">:</span> <span class="nx">_worseOrderId</span><span class="p">,</span>
@@ -11272,11 +11276,11 @@ should lose all economic value, while any REP Staked on the Market’s true Outc
   <span class="na">onFailed</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">);</span> <span class="p">}</span>
 <span class="p">});</span>
 
-<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">Trade</span><span class="p">.</span><span class="nx">publicFillBestOrderWithLimit</span><span class="p">({</span>
+<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">Trade</span><span class="p">.</span><span class="nx">publicFillBestOrderWithTotalCost</span><span class="p">({</span>
   <span class="na">_direction</span><span class="p">:</span> <span class="s2">"0x1"</span><span class="p">,</span>
   <span class="na">_market</span><span class="p">:</span> <span class="nx">_market</span><span class="p">,</span>
   <span class="na">_outcome</span><span class="p">:</span> <span class="nx">_outcome</span><span class="p">,</span>
-  <span class="na">_fxpAmount</span><span class="p">:</span> <span class="nx">_fxpAmount</span><span class="p">,</span>
+  <span class="na">_totalCost</span><span class="p">:</span> <span class="nx">_totalCost</span><span class="p">,</span>
   <span class="na">_price</span><span class="p">:</span> <span class="nx">_price</span><span class="p">,</span>
   <span class="na">_betterOrderId</span><span class="p">:</span> <span class="nx">_betterOrderId</span><span class="p">,</span>
   <span class="na">_worseOrderId</span><span class="p">:</span> <span class="nx">_worseOrderId</span><span class="p">,</span>
@@ -11300,12 +11304,12 @@ should lose all economic value, while any REP Staked on the Market’s true Outc
 
 <h3 id="augur-api-trade-publicbuy-p">augur.api.Trade.publicBuy(p)</h3>
 
-<p>Buys <code class="prettyprint">p._fxpAmount</code> number of <a href="#share">Shares</a> in <a href="#outcome">Outcome</a> <code class="prettyprint">p._outcome</code> of <a href="#market">Market</a> <code class="prettyprint">p._market</code> at <code class="prettyprint">p._price</code> <a href="#atto-prefix">attoETH</a> per Share. This transaction takes <a href="#order">Orders</a> off the <a href="#order-book">Order Book</a> that can be <a href="#fill-order">Filled</a> with this request, otherwise it creates a new Order to buy <code class="prettyprint">p._fxpAmount</code> of <a href="#share-unit">Share Units</a> at <code class="prettyprint">p._price</code>. The parameters <code class="prettyprint">p._betterOrderId</code> and <code class="prettyprint">p._worseOrderId</code> are the Orders with the next best/next worse price after <code class="prettyprint">p._price</code>, and they are used to optimize the process of sorting the new Order on the Order Book. Their IDs can be obtained by calling <code class="prettyprint">augur.trading.getBetterWorseOrders</code>. This transaction will trigger an <a href="#OrderCreated"><code class="prettyprint">OrderCreated</code></a> event if the Order is created without any errors.</p>
+<p>Buys <code class="prettyprint">p._amount</code> number of <a href="#share">Shares</a> in <a href="#outcome">Outcome</a> <code class="prettyprint">p._outcome</code> of <a href="#market">Market</a> <code class="prettyprint">p._market</code> at <code class="prettyprint">p._price</code> <a href="#atto-prefix">attoETH</a> per Share. This transaction takes <a href="#order">Orders</a> off the <a href="#order-book">Order Book</a> that can be <a href="#fill-order">Filled</a> with this request, otherwise it creates a new Order to buy <code class="prettyprint">p._amount</code> of <a href="#share-unit">Share Units</a> at <code class="prettyprint">p._price</code>. The parameters <code class="prettyprint">p._betterOrderId</code> and <code class="prettyprint">p._worseOrderId</code> are the Orders with the next best/next worse price after <code class="prettyprint">p._price</code>, and they are used to optimize the process of sorting the new Order on the Order Book. Their IDs can be obtained by calling <code class="prettyprint">augur.trading.getBetterWorseOrders</code>. This transaction will trigger an <a href="#OrderCreated"><code class="prettyprint">OrderCreated</code></a> event if the Order is created without any errors.</p>
 
 <p>This transaction will fail if:</p>
 
 <ul>
-<li>The value of the order (calculated as <code class="prettyprint">p._price</code> * <code class="prettyprint">p._fxpAmount</code>) is less than the minimum value for a Buy order, which is 10**14 attoETH.</li>
+<li>The value of the order (calculated as <code class="prettyprint">p._price</code> * <code class="prettyprint">p._amount</code>) is less than the minimum value for a Buy order, which is 10**14 attoETH.</li>
 </ul>
 
 <h4 id="strong-strong"><strong>Parameters:</strong></h4>
@@ -11316,7 +11320,7 @@ should lose all economic value, while any REP Staked on the Market’s true Outc
 <ul>
 <li><strong><code class="prettyprint">p._market</code></strong>  (string) Ethereum address of the Market in which to buy Shares, as a 20-byte hexadecimal value.</li>
 <li><strong><code class="prettyprint">p._outcome</code></strong> (string) Outcome for which to place the Order, as a hexadecimal string.</li>
-<li><strong><code class="prettyprint">p._fxpAmount</code></strong>  (string) Number of <a href="#share-unit">Share Units</a> to buy, as a hexadecimal string.</li>
+<li><strong><code class="prettyprint">p._amount</code></strong>  (string) Number of <a href="#share-unit">Share Units</a> to buy, as a hexadecimal string.</li>
 <li><strong><code class="prettyprint">p._price</code></strong>  (string) Price at which to buy Shares, in attoETH, as a hexadecimal string.</li>
 <li><strong><code class="prettyprint">p._betterOrderId</code></strong> (string) Order ID of an existing Order on the Order Book with the next-best price with respect to the Order this transaction is intending to create, as a 32-byte hexadecimal value. Can be obtained by calling <code class="prettyprint">augur.trading.getBetterWorseOrders</code>.</li>
 <li><strong><code class="prettyprint">p._worseOrderId</code></strong> (string) Order ID of an existing Order on the Order Book with the next-worse price with respect to the Order this transaction is intending to create, as a 32-byte hexadecimal value. Can be obtained by calling <code class="prettyprint">augur.trading.getBetterWorseOrders</code>.</li>
@@ -11353,7 +11357,7 @@ should lose all economic value, while any REP Staked on the Market’s true Outc
 <ul>
 <li><strong><code class="prettyprint">p._market</code></strong>  (string) Ethereum address of the Market in which to buy Shares, as a 20-byte hexadecimal value.</li>
 <li><strong><code class="prettyprint">p._outcome</code></strong> (string) Outcome for which to place the Order, as a hexadecimal string.</li>
-<li><strong><code class="prettyprint">p._fxpAmount</code></strong>  (string) Number of <a href="#share-unit">Share Units</a> to buy, as a hexadecimal string.</li>
+<li><strong><code class="prettyprint">p._amount</code></strong>  (string) Number of <a href="#share-unit">Share Units</a> to buy, as a hexadecimal string.</li>
 <li><strong><code class="prettyprint">p._price</code></strong>  (string) Price at which to buy Shares, in attoETH, as a hexadecimal string.</li>
 <li><strong><code class="prettyprint">p._betterOrderId</code></strong> (string) Order ID of an existing Order on the Order Book with the next-best price with respect to the Order this transaction is intending to create, as a 32-byte hexadecimal value. Can be obtained by calling <code class="prettyprint">augur.trading.getBetterWorseOrders</code>.</li>
 <li><strong><code class="prettyprint">p._worseOrderId</code></strong> (string) Order ID of an existing Order on the Order Book with the next-worse price with respect to the Order this transaction is intending to create, as a 32-byte hexadecimal value. Can be obtained by calling <code class="prettyprint">augur.trading.getBetterWorseOrders</code>.</li>
@@ -11381,12 +11385,12 @@ should lose all economic value, while any REP Staked on the Market’s true Outc
 
 <h3 id="augur-api-trade-publicsell-p">augur.api.Trade.publicSell(p)</h3>
 
-<p>Sells <code class="prettyprint">p._fxpAmount</code> number of <a href="#share-unit">Share Units</a> in <a href="#outcome">Outcome</a> <code class="prettyprint">p._outcome</code> of <a href="#market">Market</a> <code class="prettyprint">p._market</code> at <code class="prettyprint">p._price</code> <a href="#atto-prefix">attoETH</a> per Share. This transaction takes <a href="#order">Orders</a> off the <a href="#order-book">Order Book</a> that can be <a href="#fill-order">Filled</a> with this request, otherwise it creates a new Order to sell <code class="prettyprint">p._fxpAmount</code> of Share Units. The parameters <code class="prettyprint">p._betterOrderId</code> and <code class="prettyprint">p._worseOrderId</code> are the Orders with the next best/next worse price with respect to <code class="prettyprint">p._price</code>, and they are used to optimize the process of sorting the new Order on the Order Book. Their IDs can be obtained by calling <code class="prettyprint">augur.trading.getBetterWorseOrders</code>. This transaction will trigger an <a href="#OrderCreated"><code class="prettyprint">OrderCreated</code></a> event if the Order is created without any errors.</p>
+<p>Sells <code class="prettyprint">p._amount</code> number of <a href="#share-unit">Share Units</a> in <a href="#outcome">Outcome</a> <code class="prettyprint">p._outcome</code> of <a href="#market">Market</a> <code class="prettyprint">p._market</code> at <code class="prettyprint">p._price</code> <a href="#atto-prefix">attoETH</a> per Share. This transaction takes <a href="#order">Orders</a> off the <a href="#order-book">Order Book</a> that can be <a href="#fill-order">Filled</a> with this request, otherwise it creates a new Order to sell <code class="prettyprint">p._amount</code> of Share Units. The parameters <code class="prettyprint">p._betterOrderId</code> and <code class="prettyprint">p._worseOrderId</code> are the Orders with the next best/next worse price with respect to <code class="prettyprint">p._price</code>, and they are used to optimize the process of sorting the new Order on the Order Book. Their IDs can be obtained by calling <code class="prettyprint">augur.trading.getBetterWorseOrders</code>. This transaction will trigger an <a href="#OrderCreated"><code class="prettyprint">OrderCreated</code></a> event if the Order is created without any errors.</p>
 
 <p>This transaction will fail if:</p>
 
 <ul>
-<li>The value of the Order (calculated as <code class="prettyprint">p._price</code> * (Market&rsquo;s number of Ticks - <code class="prettyprint">p._fxpAmount</code>)) is less than the minimum value for a Sell Order, which is 10**14 attoETH.</li>
+<li>The value of the Order (calculated as <code class="prettyprint">p._price</code> * (Market&rsquo;s number of Ticks - <code class="prettyprint">p._amount</code>)) is less than the minimum value for a Sell Order, which is 10**14 attoETH.</li>
 </ul>
 
 <h4 id="strong-strong"><strong>Parameters:</strong></h4>
@@ -11397,7 +11401,7 @@ should lose all economic value, while any REP Staked on the Market’s true Outc
 <ul>
 <li><strong><code class="prettyprint">p._market</code></strong>  (string) Ethereum address of the Market in which to sell Shares, as a 20-byte hexadecimal value.</li>
 <li><strong><code class="prettyprint">p._outcome</code></strong> (string) Outcome for which to place the Order, as a hexadecimal string.</li>
-<li><strong><code class="prettyprint">p._fxpAmount</code></strong>  (string) Number of Share Units to sell, as a hexadecimal string.</li>
+<li><strong><code class="prettyprint">p._amount</code></strong>  (string) Number of Share Units to sell, as a hexadecimal string.</li>
 <li><strong><code class="prettyprint">p._price</code></strong>  (string) Price at which to sell Share Units, in attoETH, as a hexadecimal string.</li>
 <li><strong><code class="prettyprint">p._betterOrderId</code></strong> (string) Order ID of an existing Order on the Order Book with the next-best price with respect to the Order this transaction is intending to create, as a 32-byte hexadecimal value. Can be obtained by calling <code class="prettyprint">augur.trading.getBetterWorseOrders</code>.</li>
 <li><strong><code class="prettyprint">p._worseOrderId</code></strong> (string) Order ID of an existing Order on the Order Book with the next-worse price with respect to the Order this transaction is intending to create, as a 32-byte hexadecimal value. Can be obtained by calling <code class="prettyprint">augur.trading.getBetterWorseOrders</code>.</li>
@@ -11434,7 +11438,7 @@ should lose all economic value, while any REP Staked on the Market’s true Outc
 <ul>
 <li><strong><code class="prettyprint">p._market</code></strong>  (string) Ethereum address of the Market in which to sell Shares, as a 20-byte hexadecimal value.</li>
 <li><strong><code class="prettyprint">p._outcome</code></strong> (string) Outcome for which to place the Order, as a hexadecimal string.</li>
-<li><strong><code class="prettyprint">p._fxpAmount</code></strong>  (string) Number of Shares Units to sell, as a hexadecimal string.</li>
+<li><strong><code class="prettyprint">p._amount</code></strong>  (string) Number of Shares Units to sell, as a hexadecimal string.</li>
 <li><strong><code class="prettyprint">p._price</code></strong>  (string) Price at which to sell Share Units, in attoETH, as a hexadecimal string.</li>
 <li><strong><code class="prettyprint">p._betterOrderId</code></strong> (string) Order ID of an existing Order on the Order Book with the next-best price with respect to the Order this transaction is intending to create, as a 32-byte hexadecimal value. Can be obtained by calling <code class="prettyprint">augur.trading.getBetterWorseOrders</code>.</li>
 <li><strong><code class="prettyprint">p._worseOrderId</code></strong> (string) Order ID of an existing Order on the Order Book with the next-worse price with respect to the Order this transaction is intending to create, as a 32-byte hexadecimal value. Can be obtained by calling <code class="prettyprint">augur.trading.getBetterWorseOrders</code>.</li>
@@ -11466,7 +11470,7 @@ should lose all economic value, while any REP Staked on the Market’s true Outc
 
 <p>This transaction will fail if:</p>
 
-<p>The value of the Order (calculated as p._price * (Market’s number of Ticks - p._fxpAmount) for a sell Order and <code class="prettyprint">p._price</code> * <code class="prettyprint">p._fxpAmount</code> for a buy Order) is less than the minimum value for an Order, which is 10**14 attoETH.</p>
+<p>The value of the Order (calculated as p._price * (Market’s number of Ticks - p._amount) for a sell Order and <code class="prettyprint">p._price</code> * <code class="prettyprint">p._amount</code> for a buy Order) is less than the minimum value for an Order, which is 10**14 attoETH.</p>
 
 <h4 id="strong-strong"><strong>Parameters:</strong></h4>
 
@@ -11477,7 +11481,7 @@ should lose all economic value, while any REP Staked on the Market’s true Outc
 <li><strong><code class="prettyprint">p._direction</code></strong> (string) Direction of the trade, as a hexadecimal string. (&ldquo;0x0&rdquo; for long or &ldquo;0x1&rdquo; for short.)</li>
 <li><strong><code class="prettyprint">p._market</code></strong>  (string) Ethereum address of the Market in which to buy/sell Shares, as a 20-byte hexadecimal value.</li>
 <li><strong><code class="prettyprint">p._outcome</code></strong> (string) Outcome for which to place the Order, as a hexadecimal string.</li>
-<li><strong><code class="prettyprint">p._fxpAmount</code></strong>  (string) Number of <a href="#share-unit">Share Units</a> to buy/sell, as a hexadecimal string.</li>
+<li><strong><code class="prettyprint">p._amount</code></strong>  (string) Number of <a href="#share-unit">Share Units</a> to buy/sell, as a hexadecimal string.</li>
 <li><strong><code class="prettyprint">p._price</code></strong>  (string) Price at which to buy/sell Shares, in <a href="#atto-prefix">attoETH</a>, as a hexadecimal string.</li>
 <li><strong><code class="prettyprint">p._betterOrderId</code></strong> (string) Order ID of an existing Order on the Order Book with the next-best price with respect to the Order this transaction is intending to create, as a 32-byte hexadecimal value. Can be obtained by calling <code class="prettyprint">augur.trading.getBetterWorseOrders</code>.</li>
 <li><strong><code class="prettyprint">p._worseOrderId</code></strong> (string) Order ID of an existing Order on the Order Book with the next-worse price with respect to the Order this transaction is intending to create, as a 32-byte hexadecimal value. Can be obtained by calling <code class="prettyprint">augur.trading.getBetterWorseOrders</code>.</li>
@@ -11502,7 +11506,7 @@ should lose all economic value, while any REP Staked on the Market’s true Outc
 <li>Return value cannot be obtained because Ethereum nodes <a href="#transaction-return-values">discard</a> transaction return values.</li>
 </ul>
 
-<h3 id="augur-api-trade-publictradewithlimit-p">augur.api.Trade.publicTradeWithLimit(p)</h3>
+<h3 id="augur-api-trade-publictradewithtotalcost-p">augur.api.Trade.publicTradeWithTotalCost(p)</h3>
 
 <p>Works like <code class="prettyprint">augur.api.Trade.publicTrade</code>, but uses the parameter <code class="prettyprint">_loopLimit</code> to determine how many <a href="#fill-order">Fill Order</a> operations to perform. The function <code class="prettyprint">augur.api.Trade.publicTrade</code> will do as many Fill Order operations as the amount of gas passed to it will permit, based on a hard-coded value for how much gas is needed to Fill an Order. If the gas cost drops significantly from where it is at Augur&rsquo;s launch, the Trade contract would require far more gas than is actually needed. Therefore, in such a scenario, <code class="prettyprint">augur.api.Trade.publicTradeWithLimit</code> could be used instead.</p>
 
@@ -11515,7 +11519,7 @@ should lose all economic value, while any REP Staked on the Market’s true Outc
 <li><strong><code class="prettyprint">p._direction</code></strong> (string) Direction of the trade, as a hexadecimal string. (&ldquo;0x0&rdquo; for long or &ldquo;0x1&rdquo; for short.)</li>
 <li><strong><code class="prettyprint">p._market</code></strong>  (string) Ethereum address of the Market in which to buy/sell Shares, as a 20-byte hexadecimal value.</li>
 <li><strong><code class="prettyprint">p._outcome</code></strong> (string) Outcome for which to place the Order, as a hexadecimal string.</li>
-<li><strong><code class="prettyprint">p._fxpAmount</code></strong>  (string) Number of <a href="#share-unit">Share Units</a> to buy/sell, as a hexadecimal string.</li>
+<li><strong><code class="prettyprint">p._totalCost</code></strong>  (string) </li>
 <li><strong><code class="prettyprint">p._price</code></strong>  (string) Price at which to buy/sell Shares, in <a href="#atto-prefix">attoETH</a>, as a hexadecimal string.</li>
 <li><strong><code class="prettyprint">p._betterOrderId</code></strong> (string) Order ID of an existing Order on the Order Book with the next-best price with respect to the Order this transaction is intending to create, as a 32-byte hexadecimal value. Can be obtained by calling <code class="prettyprint">augur.trading.getBetterWorseOrders</code>.</li>
 <li><strong><code class="prettyprint">p._worseOrderId</code></strong> (string) Order ID of an existing Order on the Order Book with the next-worse price with respect to the Order this transaction is intending to create, as a 32-byte hexadecimal value. Can be obtained by calling <code class="prettyprint">augur.trading.getBetterWorseOrders</code>.</li>
@@ -11554,7 +11558,7 @@ should lose all economic value, while any REP Staked on the Market’s true Outc
 <li><strong><code class="prettyprint">p._direction</code></strong> (string) Direction of the trade, as a hexadecimal string. (&ldquo;0x0&rdquo; for long or &ldquo;0x1&rdquo; for short.)</li>
 <li><strong><code class="prettyprint">p._market</code></strong>  (string) Ethereum address of the Market in which to buy/sell Shares, as a 20-byte hexadecimal value.</li>
 <li><strong><code class="prettyprint">p._outcome</code></strong> (string) Outcome for which to place the Order, as a hexadecimal string.</li>
-<li><strong><code class="prettyprint">p._fxpAmount</code></strong>  (string) Number of <a href="#share-unit">Share Units</a> to buy/sell, as a hexadecimal string</li>
+<li><strong><code class="prettyprint">p._amount</code></strong>  (string) Number of <a href="#share-unit">Share Units</a> to buy/sell, as a hexadecimal string</li>
 <li><strong><code class="prettyprint">p._price</code></strong>  (string) Price at which to buy/sell Shares, in <a href="#atto-prefix">attoETH</a>, as a hexadecimal string.</li>
 <li><strong><code class="prettyprint">p._betterOrderId</code></strong> (string) Order ID of an existing Order on the Order Book with the next-best price with respect to the Order this transaction is intending to create, as a 32-byte hexadecimal value. Can be obtained by calling <code class="prettyprint">augur.trading.getBetterWorseOrders</code>.</li>
 <li><strong><code class="prettyprint">p._worseOrderId</code></strong> (string) Order ID of an existing Order on the Order Book with the next-worse price with respect to the Order this transaction is intending to create, as a 32-byte hexadecimal value. Can be obtained by calling <code class="prettyprint">augur.trading.getBetterWorseOrders</code>.</li>
@@ -11578,7 +11582,7 @@ should lose all economic value, while any REP Staked on the Market’s true Outc
 <li>Return value cannot be obtained because Ethereum nodes <a href="#transaction-return-values">discard</a> transaction return values.</li>
 </ul>
 
-<h3 id="augur-api-trade-publicfillbestorderwithlimit-p">augur.api.Trade.publicFillBestOrderWithLimit(p)</h3>
+<h3 id="augur-api-trade-publicfillbestorderwithtotalcost-p">augur.api.Trade.publicFillBestOrderWithTotalCost(p)</h3>
 
 <p>Works like <code class="prettyprint">augur.api.Trade.publicFillBestOrder</code>, but uses the parameter <code class="prettyprint">_loopLimit</code> to determine how many <a href="#fill-order">Fill Order</a> operations to perform. The function <code class="prettyprint">augur.api.Trade.publicFillBestOrder</code> will do as many Fill Order operations as the amount of gas passed to it will permit, based on a hard-coded value for how much gas is needed to Fill an Order. If the gas cost drops significantly from where it is at Augur&rsquo;s launch, the Trade contract would require far more gas than is actually needed. Therefore, in such a scenario, <code class="prettyprint">augur.api.Trade.publicFillBestOrderWithLimit</code> could be used instead.</p>
 
@@ -11591,7 +11595,7 @@ should lose all economic value, while any REP Staked on the Market’s true Outc
 <li><strong><code class="prettyprint">p._direction</code></strong> (string) Direction of the trade, as a hexadecimal string. (&ldquo;0x0&rdquo; for long or &ldquo;0x1&rdquo; for short.)</li>
 <li><strong><code class="prettyprint">p._market</code></strong>  (string) Ethereum address of the Market in which to buy/sell Shares, as a 20-byte hexadecimal value.</li>
 <li><strong><code class="prettyprint">p._outcome</code></strong> (string) Outcome for which to place the Order, as a hexadecimal string.</li>
-<li><strong><code class="prettyprint">p._fxpAmount</code></strong>  (string) Number of <a href="#share-unit">Share Units</a> to buy/sell, as a hexadecimal string</li>
+<li><strong><code class="prettyprint">p._totalCost</code></strong>  (string) </li>
 <li><strong><code class="prettyprint">p._price</code></strong>  (string) Price at which to buy/sell Shares, in <a href="#atto-prefix">attoETH</a>, as a hexadecimal string.</li>
 <li><strong><code class="prettyprint">p._betterOrderId</code></strong> (string) Order ID of an existing Order on the Order Book with the next-best price with respect to the Order this transaction is intending to create, as a 32-byte hexadecimal value. Can be obtained by calling <code class="prettyprint">augur.trading.getBetterWorseOrders</code>.</li>
 <li><strong><code class="prettyprint">p._worseOrderId</code></strong> (string) Order ID of an existing Order on the Order Book with the next-worse price with respect to the Order this transaction is intending to create, as a 32-byte hexadecimal value. Can be obtained by calling <code class="prettyprint">augur.trading.getBetterWorseOrders</code>.</li>
