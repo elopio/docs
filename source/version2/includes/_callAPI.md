@@ -1376,7 +1376,7 @@ Returns the Unix timestamp at which the specified [Market's](#market) [Designate
 
 #### **Returns:**
 
-* (number) Unix timestamp at which the Market's Designated Reporting Phase ends, as a stringified unsigned integer.
+* (string) Unix timestamp at which the Market's Designated Reporting Phase ends, as a stringified unsigned integer.
 
 ### augur.api.Market.getDisputePacingOn(p, callback)
 
