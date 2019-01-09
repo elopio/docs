@@ -686,6 +686,14 @@ augur.createMarket.getMarketFromCreateMarketReceipt(
 
 Creates a [Categorical Market](#categorical-market) in a specified [Universe](#universe). This function will trigger a [`MarketCreated`](#MarketCreated) event and [`TokensTransferred`](#TokensTransferred) event if the [Market](#market) is created successfully.
 
+This transaction will fail if:
+
+* `p._outcomes` contains fewer than 2 outcomes or more than 8 outcomes.
+* `p._designatedReporterAddress` is set to the null address.
+* `p._feePerEthInWei` is greater than the maximum fee (0.5 ETH).
+* `p._endTime` has already passed.
+* The Universe is Forking.
+
 NOTE: The account attempting to create the new market must have sufficient REP in order for the market to be created. This is also true when calling `eth_estimateGas`, which essentially does a trial run of the transaction to determine what the gas cost would be to actually run it. 
 
 #### **Parameters:**
@@ -712,6 +720,15 @@ NOTE: The account attempting to create the new market must have sufficient REP i
 ### augur.createMarket.createScalarMarket(p)
 
 Creates a [Scalar Market](#scalar-market) in a specified [Universe](#universe). This function will trigger a [`MarketCreated`](#MarketCreated) event and [`TokensTransferred`](#TokensTransferred) event if the [Market](#market) is created successfully.
+
+This transaction will fail if:
+
+* `p._outcomes` contains fewer than 2 outcomes or more than 8 outcomes.
+* `p._designatedReporterAddress` is set to the null address.
+* `p._numTicks` is less than 2.
+* `p._feePerEthInWei` is greater than the maximum fee (0.5 ETH).
+* `p._endTime` has already passed.
+* The Universe is Forking.
 
 NOTE: The account attempting to create the new market must have sufficient REP in order for the market to be created. This is also true when calling `eth_estimateGas`, which essentially does a trial run of the transaction to determine what the gas cost would be to actually run it. 
 
@@ -741,6 +758,14 @@ NOTE: The account attempting to create the new market must have sufficient REP i
 ### augur.createMarket.createYesNoMarket(p)
 
 Creates a [Yes/No Market](#yes-no-market) in a specified [Universe](#universe). This function will trigger a [`MarketCreated`](#MarketCreated) event and [`TokensTransferred`](#TokensTransferred) event if the [Market](#market) is created successfully.
+
+This transaction will fail if:
+
+* `p._outcomes` contains fewer than 2 outcomes or more than 8 outcomes.
+* `p._designatedReporterAddress` is set to the null address.
+* `p._feePerEthInWei` is greater than the maximum fee (0.5 ETH).
+* `p._endTime` has already passed.
+* The Universe is Forking.
 
 NOTE: The account attempting to create the new market must have sufficient REP in order for the market to be created. This is also true when calling `eth_estimateGas`, which essentially does a trial run of the transaction to determine what the gas cost would be to actually run it.
 
@@ -2208,77 +2233,24 @@ augur.trading.getUserTradingHistory({
 
 augur.trading.getUserTradingPositions({
   account: "0x000000000000000000000000000000000000d00d",
-  universe: "0x000000000000000000000000000000000000000b",
+  marketId: "0x0000000000000000000000000000000000000ff1",
 }, function (error, result) {
   console.log(result);
 });
 // example output:
 [
   {
-    marketId: "0x0000000000000000000000000000000000000001",
-    outcome: 0,
-    numShares: "1.8",
-    numSharesAdjustedForUserIntention: "-1.8",
-    realizedProfitLoss: "-0.26",
-    unrealizedProfitLoss: "0",
-    averagePrice: "4.2",
-  }, {
-    marketId: "0x0000000000000000000000000000000000000001",
+    averagePrice: "26.99662542182234436667",
+    cost: "0.00809898762654670331",
+    marketId: "0x0000000000000000000000000000000000000ff1",
+    netPosition: "-0.0003",
     outcome: 1,
-    numShares: "0",
-    numSharesAdjustedForUserIntention: "0",
-    realizedProfitLoss: "0",
-    unrealizedProfitLoss: "0",
-    averagePrice: "0",
-  }, {
-    marketId: "0x0000000000000000000000000000000000000001",
-    outcome: 2,
-    numShares: "0",
-    numSharesAdjustedForUserIntention: "0",
-    realizedProfitLoss: "0",
-    unrealizedProfitLoss: "0",
-    averagePrice: "0",
-  }, {
-    marketId: "0x0000000000000000000000000000000000000001",
-    outcome: 3,
-    numShares: "0",
-    numSharesAdjustedForUserIntention: "0",
-    realizedProfitLoss: "0",
-    unrealizedProfitLoss: "0",
-    averagePrice: "0",
-  }, {
-    marketId: "0x0000000000000000000000000000000000000001",
-    outcome: 4,
-    numShares: "0",
-    numSharesAdjustedForUserIntention: "0",
-    realizedProfitLoss: "0",
-    unrealizedProfitLoss: "0",
-    averagePrice: "0",
-  }, {
-    marketId: "0x0000000000000000000000000000000000000001",
-    outcome: 5,
-    numShares: "0",
-    numSharesAdjustedForUserIntention: "0",
-    realizedProfitLoss: "0",
-    unrealizedProfitLoss: "0",
-    averagePrice: "0",
-  }, {
-    marketId: "0x0000000000000000000000000000000000000001",
-    outcome: 6,
-    numShares: "0",
-    numSharesAdjustedForUserIntention: "0",
-    realizedProfitLoss: "0",
-    unrealizedProfitLoss: "0",
-    averagePrice: "0",
-  }, {
-    marketId: "0x0000000000000000000000000000000000000001",
-    outcome: 7,
-    numShares: "0",
-    numSharesAdjustedForUserIntention: "0",
-    realizedProfitLoss: "0",
-    unrealizedProfitLoss: "0",
-    averagePrice: "0",
-  }
+    position: "0",
+    realized: "54999999999.56442531007152770894",
+    timestamp: 1534435013,
+    total: "54999999999.56442531007152770894",
+    unrealized: "0",
+  },
 ]
 
 augur.trading.normalizePrice({
