@@ -1,5 +1,7 @@
 ---
-title: Augur documentation
+title: Augur Documentation
+description: Technical documentation for the AugurJS API library used to interact with the Augur protocol. 
+canonical: http://www.docs.augur.net
 
 language_tabs:
   - javascript: Code
