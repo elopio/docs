@@ -2333,6 +2333,8 @@ augur.api.Trade.publicFillBestOrder({
   _amount: _amount,
   _price: _price,
   _tradeGroupId: _tradeGroupId,
+  _loopLimit: _loopLimit,
+  _ignoreShares: true,
   tx: { 
     to: tradeAddress,
     gas: "0x632ea0" 
@@ -2355,6 +2357,7 @@ augur.api.Trade.publicFillBestOrderWithTotalCost({
   _price: _price,
   _tradeGroupId: _tradeGroupId,
   _loopLimit: _loopLimit,
+  _ignoreShares: true,
   tx: { 
     to: tradeAddress,
     gas: "0x632ea0" 
@@ -2378,6 +2381,8 @@ augur.api.Trade.publicTrade({
   _betterOrderId: _betterOrderId,
   _worseOrderId: _worseOrderId,
   _tradeGroupId: _tradeGroupId,
+  _loopLimit: _loopLimit,
+  _ignoreShares: true,
   tx: { 
     to: tradeAddress,
     gas: "0x632ea0" 
@@ -2402,6 +2407,7 @@ augur.api.Trade.publicTradeWithTotalCost({
   _worseOrderId: _worseOrderId,
   _tradeGroupId: _tradeGroupId,
   _loopLimit: _loopLimit,
+  _ignoreShares: true,
   tx: { 
     to: tradeAddress,
     gas: "0x632ea0" 
