@@ -1824,22 +1824,7 @@ augur.api.ReputationToken.transferFrom({
   onFailed: function (result) { console.log(result); }
 });
 
-augur.api.ReputationToken.updateParentTotalTheoreticalSupply({
-  tx: { 
-    to: reputationTokenAddress,
-    gas: "0x632ea0" 
-  }, 
-  meta: {
-    accountType: "privateKey",
-    address: "0x913dA4198E6bE1D5f5E4a40D0667f70C0B5430Ec",
-    signer: [252, 111, 32, 94, 233, 213, 105, 71, 89, 162, 243, 247, 56, 81, 213, 103, 239, 75, 212, 240, 234, 95, 8, 201, 217, 55, 225, 0, 85, 109, 158, 25],
-  },
-  onSent: function (result) { console.log(result); },
-  onSuccess: function (result) { console.log(result); },
-  onFailed: function (result) { console.log(result); }
-});
-
-augur.api.ReputationToken.updateSiblingMigrationTotal({
+augur.api.ReputationToken.updateTotalTheoreticalSupply({
   tx: { 
     to: reputationTokenAddress,
     gas: "0x632ea0" 
@@ -2045,38 +2030,13 @@ This transaction will fail if:
 
 * Return value cannot be obtained because Ethereum nodes [discard](#transaction-return-values) transaction return values.
 
-### augur.api.ReputationToken.updateParentTotalTheoreticalSupply(p)
+### augur.api.ReputationToken.updateTotalTheoreticalSupply(p)
 
-Gets the current [Theoretical REP Supply](#theoretical-rep-supply) for this ReputationToken contract's [Parent Universe](#parent-universe), and updates this ReputationToken contract's Theoretical REP Supply accordingly.
-
-#### **Parameters:**
-
-* **`p`** (Object) Parameters object.
-    * **`p.tx`** (Object) Object containing details about how this transaction should be made.
-        * **`p.tx.to`** (string) Ethereum contract address on which to call this function, as a 20-byte hexadecimal string.
-        * **`p.tx.gas`** (string) Gas limit to use when submitting this transaction, as a hexadecimal string.
-    * **`p.meta`**  (<a href="#Meta">Meta</a>) &lt;optional> Authentication metadata for raw transactions.
-    * **`p.onSent`**  (function) Callback function that executes once the transaction has been sent.
-    * **`p.onSuccess`**  (function) &lt;optional> Callback function that executes if the transaction returned successfully.
-    * **`p.onFailed`**  (function) &lt;optional> Callback function that executes if the transaction failed.
-
-#### **Returns:**
-
-* Return value cannot be obtained because Ethereum nodes [discard](#transaction-return-values) transaction return values.
-
-### augur.api.ReputationToken.updateSiblingMigrationTotal(p)
-
-Gets the current [Theoretical REP Supply](#theoretical-rep-supply) for a ReputationToken contract sharing the same [Parent Universe](#parent-universe) as the specified ReputationToken, and updates the specified ReputationToken contract's Theoretical REP Supply accordingly.
-
-This transaction will fail if:
-
-* `p._token` is the same ReputationToken contract as one this transaction is being called on.
-* `p._token` does not have the same Parent Universe as the ReputationToken contract this transaction is being called on.
+Updates this ReputationToken contract's total [Theoretical REP Supply](#theoretical-rep-supply).
 
 #### **Parameters:**
 
 * **`p`** (Object) Parameters object.
-    * **`p._token`**  (string) Ethereum contract address of a ReputationToken contract that has the same Parent Universe as the one this transaction is being called on.
     * **`p.tx`** (Object) Object containing details about how this transaction should be made.
         * **`p.tx.to`** (string) Ethereum contract address on which to call this function, as a 20-byte hexadecimal string.
         * **`p.tx.gas`** (string) Gas limit to use when submitting this transaction, as a hexadecimal string.

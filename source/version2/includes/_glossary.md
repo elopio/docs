@@ -392,7 +392,7 @@ The Tentative Outcome is the currently reported [Outcome](#outcome) for a [Marke
 
 ## Theoretical REP Supply
 
-The theoretical [REP](#rep) supply for a [Universe](#universe) is the amount of REP that has been migrated to it, plus the REP supply of its [Parent Universe](#parent-universe).
+Normally, a [Universe's](#universe) Theoretical REP Supply is the amount of REP that exists in that Universe. However, if the [Fork Period](#fork-period) for that Universe's [Parent Universe](#parent-universe) has not yet ended, its Theoretical [REP](#rep) Supply is the amount of [REP](#rep) that has been migrated to it, plus the REP supply of its Parent Universe.
 
 ## Tick
 

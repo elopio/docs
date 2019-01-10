@@ -2325,7 +2325,7 @@ Returns total amount of [REP](#rep) that has been migrated into the current Repu
 
 ### augur.api.ReputationToken.getTotalTheoreticalSupply(p, callback)
 
-Returns the total [Theoretical REP Supply](#theoretical-rep-supply) for this ReputationToken contract. Note: To ensure this number is as accurate as possible, `augur.api.ReputationToken.updateParentTotalTheoreticalSupply` should first be called on the ReputationToken contract, and `augur.api.ReputationToken.updateSiblingMigrationTotal` should be called on any ReputationToken contracts that have the same [Parent Universe](#parent-universe).
+Returns the total [Theoretical REP Supply](#theoretical-rep-supply) for this ReputationToken contract. Note: To ensure this number is as accurate as possible, `augur.api.ReputationToken.updateParentTotalTheoreticalSupply` should first be called on the ReputationToken contract.
 
 #### **Parameters:**
 
