@@ -7265,7 +7265,7 @@ should lose all economic value, while any REP Staked on the Market’s true Outc
 
 <h3 id="augur-api-reputationtoken-gettotaltheoreticalsupply-p-callback">augur.api.ReputationToken.getTotalTheoreticalSupply(p, callback)</h3>
 
-<p>Returns the total <a href="#theoretical-rep-supply">Theoretical REP Supply</a> for this ReputationToken contract. Note: To ensure this number is as accurate as possible, <code class="prettyprint">augur.api.ReputationToken.updateParentTotalTheoreticalSupply</code> should first be called on the ReputationToken contract, and <code class="prettyprint">augur.api.ReputationToken.updateSiblingMigrationTotal</code> should be called on any ReputationToken contracts that have the same <a href="#parent-universe">Parent Universe</a>.</p>
+<p>Returns the total <a href="#theoretical-rep-supply">Theoretical REP Supply</a> for this ReputationToken contract. Note: To ensure this number is as accurate as possible, <code class="prettyprint">augur.api.ReputationToken.updateParentTotalTheoreticalSupply</code> should first be called on the ReputationToken contract.</p>
 
 <h4 id="strong-strong"><strong>Parameters:</strong></h4>
 
@@ -10441,22 +10441,7 @@ should lose all economic value, while any REP Staked on the Market’s true Outc
   <span class="na">onFailed</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">);</span> <span class="p">}</span>
 <span class="p">});</span>
 
-<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">ReputationToken</span><span class="p">.</span><span class="nx">updateParentTotalTheoreticalSupply</span><span class="p">({</span>
-  <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> 
-    <span class="na">to</span><span class="p">:</span> <span class="nx">reputationTokenAddress</span><span class="p">,</span>
-    <span class="na">gas</span><span class="p">:</span> <span class="s2">"0x632ea0"</span> 
-  <span class="p">},</span> 
-  <span class="na">meta</span><span class="p">:</span> <span class="p">{</span>
-    <span class="na">accountType</span><span class="p">:</span> <span class="s2">"privateKey"</span><span class="p">,</span>
-    <span class="na">address</span><span class="p">:</span> <span class="s2">"0x913dA4198E6bE1D5f5E4a40D0667f70C0B5430Ec"</span><span class="p">,</span>
-    <span class="na">signer</span><span class="p">:</span> <span class="p">[</span><span class="mi">252</span><span class="p">,</span> <span class="mi">111</span><span class="p">,</span> <span class="mi">32</span><span class="p">,</span> <span class="mi">94</span><span class="p">,</span> <span class="mi">233</span><span class="p">,</span> <span class="mi">213</span><span class="p">,</span> <span class="mi">105</span><span class="p">,</span> <span class="mi">71</span><span class="p">,</span> <span class="mi">89</span><span class="p">,</span> <span class="mi">162</span><span class="p">,</span> <span class="mi">243</span><span class="p">,</span> <span class="mi">247</span><span class="p">,</span> <span class="mi">56</span><span class="p">,</span> <span class="mi">81</span><span class="p">,</span> <span class="mi">213</span><span class="p">,</span> <span class="mi">103</span><span class="p">,</span> <span class="mi">239</span><span class="p">,</span> <span class="mi">75</span><span class="p">,</span> <span class="mi">212</span><span class="p">,</span> <span class="mi">240</span><span class="p">,</span> <span class="mi">234</span><span class="p">,</span> <span class="mi">95</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">201</span><span class="p">,</span> <span class="mi">217</span><span class="p">,</span> <span class="mi">55</span><span class="p">,</span> <span class="mi">225</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">85</span><span class="p">,</span> <span class="mi">109</span><span class="p">,</span> <span class="mi">158</span><span class="p">,</span> <span class="mi">25</span><span class="p">],</span>
-  <span class="p">},</span>
-  <span class="na">onSent</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">);</span> <span class="p">},</span>
-  <span class="na">onSuccess</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">);</span> <span class="p">},</span>
-  <span class="na">onFailed</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">);</span> <span class="p">}</span>
-<span class="p">});</span>
-
-<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">ReputationToken</span><span class="p">.</span><span class="nx">updateSiblingMigrationTotal</span><span class="p">({</span>
+<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">ReputationToken</span><span class="p">.</span><span class="nx">updateTotalTheoreticalSupply</span><span class="p">({</span>
   <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> 
     <span class="na">to</span><span class="p">:</span> <span class="nx">reputationTokenAddress</span><span class="p">,</span>
     <span class="na">gas</span><span class="p">:</span> <span class="s2">"0x632ea0"</span> 
@@ -10750,45 +10735,9 @@ should lose all economic value, while any REP Staked on the Market’s true Outc
 <li>Return value cannot be obtained because Ethereum nodes <a href="#transaction-return-values">discard</a> transaction return values.</li>
 </ul>
 
-<h3 id="augur-api-reputationtoken-updateparenttotaltheoreticalsupply-p">augur.api.ReputationToken.updateParentTotalTheoreticalSupply(p)</h3>
+<h3 id="augur-api-reputationtoken-updatetotaltheoreticalsupply-p">augur.api.ReputationToken.updateTotalTheoreticalSupply(p)</h3>
 
-<p>Gets the current <a href="#theoretical-rep-supply">Theoretical REP Supply</a> for this ReputationToken contract&rsquo;s <a href="#parent-universe">Parent Universe</a>, and updates this ReputationToken contract&rsquo;s Theoretical REP Supply accordingly.</p>
-
-<h4 id="strong-strong"><strong>Parameters:</strong></h4>
-
-<ul>
-<li><strong><code class="prettyprint">p</code></strong> (Object) Parameters object.
-
-<ul>
-<li><strong><code class="prettyprint">p.tx</code></strong> (Object) Object containing details about how this transaction should be made.
-
-<ul>
-<li><strong><code class="prettyprint">p.tx.to</code></strong> (string) Ethereum contract address on which to call this function, as a 20-byte hexadecimal string.</li>
-<li><strong><code class="prettyprint">p.tx.gas</code></strong> (string) Gas limit to use when submitting this transaction, as a hexadecimal string.</li>
-</ul></li>
-<li><strong><code class="prettyprint">p.meta</code></strong>  (<a href="#Meta">Meta</a>) &lt;optional&gt; Authentication metadata for raw transactions.</li>
-<li><strong><code class="prettyprint">p.onSent</code></strong>  (function) Callback function that executes once the transaction has been sent.</li>
-<li><strong><code class="prettyprint">p.onSuccess</code></strong>  (function) &lt;optional&gt; Callback function that executes if the transaction returned successfully.</li>
-<li><strong><code class="prettyprint">p.onFailed</code></strong>  (function) &lt;optional&gt; Callback function that executes if the transaction failed.</li>
-</ul></li>
-</ul>
-
-<h4 id="strong-strong"><strong>Returns:</strong></h4>
-
-<ul>
-<li>Return value cannot be obtained because Ethereum nodes <a href="#transaction-return-values">discard</a> transaction return values.</li>
-</ul>
-
-<h3 id="augur-api-reputationtoken-updatesiblingmigrationtotal-p">augur.api.ReputationToken.updateSiblingMigrationTotal(p)</h3>
-
-<p>Gets the current <a href="#theoretical-rep-supply">Theoretical REP Supply</a> for a ReputationToken contract sharing the same <a href="#parent-universe">Parent Universe</a> as the specified ReputationToken, and updates the specified ReputationToken contract&rsquo;s Theoretical REP Supply accordingly.</p>
-
-<p>This transaction will fail if:</p>
-
-<ul>
-<li><code class="prettyprint">p._token</code> is the same ReputationToken contract as one this transaction is being called on.</li>
-<li><code class="prettyprint">p._token</code> does not have the same Parent Universe as the ReputationToken contract this transaction is being called on.</li>
-</ul>
+<p>Updates this ReputationToken contract&rsquo;s total <a href="#theoretical-rep-supply">Theoretical REP Supply</a>.</p>
 
 <h4 id="strong-strong"><strong>Parameters:</strong></h4>
 
@@ -10796,7 +10745,6 @@ should lose all economic value, while any REP Staked on the Market’s true Outc
 <li><strong><code class="prettyprint">p</code></strong> (Object) Parameters object.
 
 <ul>
-<li><strong><code class="prettyprint">p._token</code></strong>  (string) Ethereum contract address of a ReputationToken contract that has the same Parent Universe as the one this transaction is being called on.</li>
 <li><strong><code class="prettyprint">p.tx</code></strong> (Object) Object containing details about how this transaction should be made.
 
 <ul>
@@ -14536,7 +14484,7 @@ Note: When calculating the Payout Set for a Scalar Market using integer-only mat
 
 <h2 id="theoretical-rep-supply">Theoretical REP Supply</h2>
 
-<p>The theoretical <a href="#rep">REP</a> supply for a <a href="#universe">Universe</a> is the amount of REP that has been migrated to it, plus the REP supply of its <a href="#parent-universe">Parent Universe</a>.</p>
+<p>Normally, a <a href="#universe">Universe&rsquo;s</a> Theoretical REP Supply is the amount of REP that exists in that Universe. However, if the <a href="#fork-period">Fork Period</a> for that Universe&rsquo;s <a href="#parent-universe">Parent Universe</a> has not yet ended, its Theoretical <a href="#rep">REP</a> Supply is the amount of <a href="#rep">REP</a> that has been migrated to it, plus the REP supply of its Parent Universe.</p>
 
 <h2 id="tick">Tick</h2>
 
