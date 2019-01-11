@@ -48,9 +48,10 @@ Note: Other properties will be present in this object, depending on what event t
 ### Category  (Object)
 
 #### **Properties:** 
-* **`category`** (string) Name of a Category.
-* **`popularity`** (string) Category popularity.
-* **`tags`** (Object) Object containing tags as keys and their corresponding counts within the category as values.
+* **`category`** (string) Name of the Category.
+* **`nonFinalizedOpenInterest`** (string) Amount of Open Interest in non-Finalized Markets with this Category, in ETH.
+* **`openInterest`** (string) Amount of Open Interest in all Markets with this Category, in ETH.
+* **`tags`** (Array.&lt;<a href="#Tag">) Array containing information about Markets with [Tags](#tag) in this Category.
 
 <a name="ClaimReportingFeesForkedMarket"></a>
 ### ClaimReportingFeesForkedMarket  (Object)
@@ -580,6 +581,15 @@ Serves as an enum for the state of a Market.
 * **`hash`** (string) Block hash of the block on the Ethereum blockchain, as a 32-byte hexadecimal value.
 * **`number`** (number) Block number.
 * **`timestamp`** (number) Unix timestamp when the block was created.
+
+<a name="Tag"></a>
+### Tag  (Object)
+
+#### **Properties:** 
+* **`nonFinalizedOpenInterest`** (string) Amount of Open Interest in non-Finalized Markets with this Tag in the corresponding Category, in ETH.
+* **`numberOfMarketsWithThisTag`** (number) Number of Markets with this Tag in the corresponding Category.
+* **`openInterest`** (string) Amount of Open Interest in all Markets with this Tag in the corresponding Category, in ETH.
+* **`tagName`** (string) Name of the Tag.
 
 <a name="TimestampedPrice"></a>
 ### TimestampedPrice  (Object)

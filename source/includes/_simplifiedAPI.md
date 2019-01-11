@@ -885,24 +885,21 @@ augur.markets.getCategories({
 });
 // example output:
 [
-  { category: "FINANCE", popularity: "12345", tags: {} },
-  { category: "POLITICS", popularity: "5000", tags: {} },
-  { category: "ETHEREUM", popularity: "1000", tags: {} },
-  { category: "AUGUR", popularity: "500", tags: {} },
-  {
-    category: "TEST CATEGORY",
-    popularity: "0",
-    tags: {
-      AUGUR: 2,
-      ETHEREUM: 1,
-      FINANCE: 2,
-      POLITICS: 1,
-      TAGGED IT: 5,
-      TAGGING IT: 5,
-      TEST TAG 1: 7,
-      TEST TAG 2: 7,
-    },
-  },
+  {"categoryName": "AUGUR", "nonFinalizedOpenInterest": "0", "openInterest": "3", "tags": []},
+  {"categoryName": "ETHEREUM", "nonFinalizedOpenInterest": "4.5", "openInterest": "4.5", "tags": []},
+  {"categoryName": "FINANCE", "nonFinalizedOpenInterest": "2.5", "openInterest": "2.6", "tags": []},
+  {"categoryName": "POLITICS", "nonFinalizedOpenInterest": "3", "openInterest": "12", "tags": []},
+  {"categoryName": "TEST CATEGORY", "nonFinalizedOpenInterest": "0", "openInterest": "0", "tags": [
+    {"nonFinalizedOpenInterest": "0", "numberOfMarketsWithThisTag": 6, "openInterest": "0", "tagName": "test tag 1"},
+    {"nonFinalizedOpenInterest": "0", "numberOfMarketsWithThisTag": 6, "openInterest": "0", "tagName": "test tag 2"},
+    {"nonFinalizedOpenInterest": "0", "numberOfMarketsWithThisTag": 2, "openInterest": "0", "tagName": "Finance"},
+    {"nonFinalizedOpenInterest": "0", "numberOfMarketsWithThisTag": 2, "openInterest": "0", "tagName": "Augur"},
+    {"nonFinalizedOpenInterest": "0", "numberOfMarketsWithThisTag": 1, "openInterest": "0", "tagName": "politics"},
+    {"nonFinalizedOpenInterest": "0", "numberOfMarketsWithThisTag": 1, "openInterest": "0", "tagName": "ethereum"},
+    {"nonFinalizedOpenInterest": "0", "numberOfMarketsWithThisTag": 5, "openInterest": "0", "tagName": "tagging it"},
+    {"nonFinalizedOpenInterest": "0", "numberOfMarketsWithThisTag": 5, "openInterest": "0", "tagName": "tagged it"},
+  ]},
+  {"categoryName": "ethereum", "nonFinalizedOpenInterest": "0", "openInterest": "0", "tags": []},
 ]
 
 augur.markets.getMarketPriceHistory({
@@ -1173,6 +1170,7 @@ This function will fail if:
     * **`p.feeWindow`** (string) &lt;optional> Ethereum address of a [Fee Window](#fee-window) by which to filter the returned results, as a 20-byte hexadecimal string.
     * **`p.designatedReporter`** (string) &lt;optional> Ethereum address of a [Designated Reporter](#designated-reporter) by which to filter the returned results, as a 20-byte hexadecimal string.
     * **`p.maxFee`** (number) &lt;optional> Maximum trading [Settlement Fee](#settlement-fees) by which to filter the returned results, as a decimal number. (For example, if the desired maximum Settlement Fee is 1.0201%, `maxFee` should be set to 0.010201.)
+    * **`p.hasOrders`** (boolean) &lt;optional> If set to `true`, only Markets having [Open Orders](#open-order) on the [Order Book](#order-book) will be returned. Defaults to `false`.
     * **`p.sortBy`**  (string) &lt;optional> Field name by which to sort the Markets.
     * **`p.isSortDescending`**  (boolean) &lt;optional> Whether to sort the Markets in descending order by sortBy field.
     * **`p.limit`**  (number) &lt;optional> Maximum number of Markets to return.
@@ -2530,7 +2528,7 @@ Calculates realized and unrealized profit/loss for trades in a single [Outcome](
 
 * **`p`** (Object) Parameters object.
     * **`p.trades`**  (Array.&lt;Object>) Trades for a single Outcome {type: string, amount: string, price: string, maker: boolean}.
-    * **`p.lastPrice`**  (string) &lt;optional> Price of this Outcome's most recent trade, as a base-10 string (default: 0).
+    * **`p.lastPrice`**  (string) &lt;optional> Price of this Outcome's most recent trade, as a base-10 string. Defaults to 0.
 
 #### **Returns:**
 
@@ -2633,7 +2631,7 @@ Returns a randomly-generated trade group ID. (Trade group IDs are used by Augur'
 #### **Parameters:**
 
 * **`p`** (Object) Parameters object.
-  * **`tradeGroupIdNumBytes`** (number) &lt;optional> Number of bytes the returned trade group ID should be. (Defaults to `augur.constants.TRADE_GROUP_ID_NUM_BYTES`.)
+  * **`tradeGroupIdNumBytes`** (number) &lt;optional> Number of bytes the returned trade group ID should be. Defaults to `augur.constants.TRADE_GROUP_ID_NUM_BYTES`.
 
 #### **Returns:**
 
@@ -2678,7 +2676,7 @@ This function will fail if:
     * **`p.orderType`**  (string) &lt;optional> Type of trade. Valid values are "buy" and "sell".
     * **`p.creator`**  (string) &lt;optional> Ethereum address of the Order creator, as a 20-byte hexadecimal string.
     * **`p.orderState`**  (<a href="#ORDER_STATE">ORDER_STATE</a>) &lt;optional> State of orders by which to filter results. Valid values are "ALL", "CANCELED", "CLOSED", & "OPEN".
-    * **`p.orphaned`**  (boolean) &lt;optional> When set to `true`, this parameter causes the function to return only [Orphaned Orders](#orphaned-orders); otherwise, the function returns non-Orphaned Orders. Defaults to false.
+    * **`p.orphaned`**  (boolean) &lt;optional> When set to `true`, this parameter causes the function to return only [Orphaned Orders](#orphaned-orders); otherwise, the function returns non-Orphaned Orders. Defaults to `false`.
     * **`p.earliestCreationTime`**  (number) &lt;optional> Earliest timestamp, in seconds, at which to truncate order results. (This timestamp is when the block on the Ethereum blockchain containing the transfer was created.)
     * **`p.latestCreationTime`**  (number) &lt;optional> Latest timestamp, in seconds, at which to truncate order results. (This timestamp is when the block on the Ethereum blockchain containing the transfer was created.)
     * **`p.sortBy`**  (string) &lt;optional> Field name by which to sort the orders.
@@ -2723,7 +2721,7 @@ This function will fail if:
     * **`p.marketId`**  (string) &lt;optional> Contract address of the Market in which to look up the trading history, as a 20-byte hexadecimal string. Either this parameter or the Universe must be specified.
     * **`p.outcome`**  (number) [Outcome](#outcome) of the [Share](#share) being bought/sold. Valid values are in the range [0,7].
     * **`p.orderType`**  (string) Type of trade. Valid values are "buy" and "sell".
-    * **`p.ignoreSelfTrades`**  (boolean) &lt;optional> Whether to ignore trades a user made with himself/herself when retrieving results. Defaults to false.
+    * **`p.ignoreSelfTrades`**  (boolean) &lt;optional> Whether to ignore trades a user made with himself/herself when retrieving results. Defaults to `false`.
     * **`p.sortBy`**  (string) &lt;optional> Field name by which to sort the trading history.
     * **`p.isSortDescending`**  (boolean) &lt;optional> Whether to sort the trading history in descending order by `sortBy` field.
     * **`p.limit`**  (number) &lt;optional> Maximum number of trading history reports to return.
@@ -2791,7 +2789,7 @@ Rescales a price to lie on [0, 1]: normalizedPrice = (price - minPrice) / (maxPr
     * **`p._market`**  (string) Ethereum contract address of the Market in which to trade, as a 20-byte hexadecimal string
     * **`p._outcome`**  (number) Outcome ID to trade, must be an integer value in between 0 and 7.
     * **`p._tradeGroupId`**  (string) &lt;optional> ID logged with each trade transaction, as a hexadecimal string. (This is generally just used by Augur's UI to group trades client-side.)
-    * **`p.doNotCreateOrders`**  (boolean) &lt;optional> If set to true, this trade will only take existing Orders off the [Order Book](#order-book), not create new ones (default: false).
+    * **`p.doNotCreateOrders`**  (boolean) &lt;optional> If set to true, this trade will only take existing Orders off the [Order Book](#order-book), not create new ones Defaults to `false`.
     * **`p.meta`**  (<a href="#Meta">Meta</a>) &lt;optional> Authentication metadata for raw transactions.
     * **`p.onSent`**  (function) Called when the first trading transaction is broadcast to the network.
     * **`p.onSuccess`**  (function) Called when the full trade completes successfully.
@@ -2819,7 +2817,7 @@ Determines the sequence of makes/takes that will be executed to [Fill](#fill-ord
     * **`p.shares`**  (string) Number of Shares to trade, as a base-10 string.
     * **`p.marketCreatorFeeRate`**  (string) The fee rate charged by the Market creator (e.g., pass in "0.01" if the fee is 1%), as a base-10 string.
     * **`p.marketOrderBook`**  (<a href="#SingleOutcomeOrderBook">SingleOutcomeOrderBook</a>) The full [Order Book](#order-book) (buy and sell) for this Market and Outcome.
-    * **`p.shouldCollectReportingFees`**  (boolean) &lt;optional> False if reporting fees are not collected; this is rare and only occurs in disowned Markets (default: true).
+    * **`p.shouldCollectReportingFees`**  (boolean) &lt;optional> False if reporting fees are not collected; this is rare and only occurs in disowned Markets. Defaults to `true`.
 
 #### **Returns:**
 
@@ -2845,7 +2843,7 @@ If `p.doNotCreateOrders` is set to `false`, this function will place trades unti
     * **`p.minPrice`**  (string) The [Minimum Display Price](#minimum-display-price) for this Market, as a base-10 string.
     * **`p.maxPrice`**  (string) The [Maximum Display Price](#maximum-display-price) for this Market, as a base-10 string.
     * **`p._tradeGroupId`**  (string) &lt;optional> ID logged with each trade transaction, as a hexadecimal string. (This is generally just used by Augur's UI to group trades client-side.)
-    * **`p.doNotCreateOrders`**  (boolean) &lt;optional> If set to true, this trade will only take existing orders off the book, not create new ones (default: false).
+    * **`p.doNotCreateOrders`**  (boolean) &lt;optional> If set to true, this trade will only take existing orders off the book, not create new ones. Defaults to `false`.
     * **`p.meta`**  (<a href="#Meta">Meta</a>) &lt;optional> Authentication metadata for raw transactions.
     * **`p.onSent`**  (function) Called when the first trading transaction is broadcast to the network.
     * **`p.onSuccess`**  (function) Called when the full trade completes successfully.
