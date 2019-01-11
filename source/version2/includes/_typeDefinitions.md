@@ -49,8 +49,8 @@ Note: Other properties will be present in this object, depending on what event t
 
 #### **Properties:** 
 * **`category`** (string) Name of the Category.
-* **`nonFinalizedOpenInterest`** (string) Amount of Open Interest in non-Finalized Markets with this Category, in ETH.
-* **`openInterest`** (string) Amount of Open Interest in all Markets with this Category, in ETH.
+* **`nonFinalizedOpenInterest`** (string) Sum of Open Interest in non-Finalized Markets in this aggregation, in ETH.
+* **`openInterest`** (string) Sum of Open Interest in all Markets in this aggregation, in ETH.
 * **`tags`** (Array.&lt;<a href="#Tag">) Array containing information about Markets with [Tags](#tag) in this Category.
 
 <a name="ClaimReportingFeesForkedMarket"></a>
@@ -585,9 +585,9 @@ Serves as an enum for the state of a Market.
 ### Tag  (Object)
 
 #### **Properties:** 
-* **`nonFinalizedOpenInterest`** (string) Amount of Open Interest in non-Finalized Markets with this Tag in the corresponding Category, in ETH.
+* **`nonFinalizedOpenInterest`** (string) Sum of Open Interest in non-Finalized Markets in this aggregation, in ETH.
 * **`numberOfMarketsWithThisTag`** (number) Number of Markets with this Tag in the corresponding Category.
-* **`openInterest`** (string) Amount of Open Interest in all Markets with this Tag in the corresponding Category, in ETH.
+* **`openInterest`** (string) Sum of Open Interest in all Markets in this aggregation, in ETH.
 * **`tagName`** (string) Name of the Tag.
 
 <a name="TimestampedPrice"></a>
