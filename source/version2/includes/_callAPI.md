@@ -57,7 +57,7 @@ augur.api.Augur.isKnownUniverse({
 // example output:
 true
 ```
-Provides JavaScript bindings for the [Augur Solidity Contract](https://github.com/AugurProject/augur-core/blob/master/source/contracts/Augur.sol), which handles [Universe](#universe) creation and event logging.
+Provides JavaScript bindings for the [Augur Solidity Contract](https://github.com/AugurProject/augur/blob/master/packages/augur-core/source/contracts/Augur.sol), which handles [Universe](#universe) creation and event logging.
 
 ### augur.api.Augur.isKnownCrowdsourcer(p, callback)
 
@@ -119,7 +119,7 @@ augur.api.Cash.allowance({
 // example output:
 "115792089237316195423570985008687907853269984665640564039457584007913129639935"
 ```
-Provides JavaScript bindings for the [Cash Solidity Contract](https://github.com/AugurProject/augur-core/blob/master/source/contracts/trading/Cash.sol), which is used internally by Augur as an ERC-20 wrapper for ETH.
+Provides JavaScript bindings for the [Cash Solidity Contract](https://github.com/AugurProject/augur/blob/master/packages/augur-core/source/contracts/trading/Cash.sol), which is used internally by Augur as an ERC-20 wrapper for ETH.
 
 ### augur.api.Cash.allowance(p, callback)
 
@@ -161,7 +161,7 @@ augur.api.ClaimTradingProceeds.calculateProceeds({
 // example output:
 "122"
 ```
-Provides JavaScript bindings for the [ClaimTradingProceeds Solidity Contract](https://github.com/AugurProject/augur-core/blob/master/source/contracts/trading/ClaimTradingProceeds.sol), which allows profits earned from trading to be claimed.
+Provides JavaScript bindings for the [ClaimTradingProceeds Solidity Contract](https://github.com/AugurProject/augur/blob/master/packages/augur-core/source/contracts/trading/ClaimTradingProceeds.sol), which allows profits earned from trading to be claimed.
 
 ### augur.api.ClaimTradingProceeds.calculateCreatorFee(p, callback)
 
@@ -304,7 +304,7 @@ augur.api.DisputeCrowdsourcer.isInvalid({
 // example output:
 true
 ```
-Provides JavaScript bindings for the [DisputeCrowdsourcer Solidity Contract](https://github.com/AugurProject/augur-core/blob/master/source/contracts/reporting/DisputeCrowdsourcer.sol), which allows users to [Stake](#dispute-stake) and redeem [REP](#rep) on [Outcomes](#outcome) other than a [Market's](#market) [Tentative Outcome](#tentative-outcome).
+Provides JavaScript bindings for the [DisputeCrowdsourcer Solidity Contract](https://github.com/AugurProject/augur/blob/master/packages/augur-core/source/contracts/reporting/DisputeCrowdsourcer.sol), which allows users to [Stake](#dispute-stake) and redeem [REP](#rep) on [Outcomes](#outcome) other than a [Market's](#market) [Tentative Outcome](#tentative-outcome).
 
 ### augur.api.DisputeCrowdsourcer.getFeeWindow(p, callback)
 
@@ -535,7 +535,7 @@ augur.api.FeeWindow.isOver({
 // example output:
 false
 ```
-Provides JavaScript bindings for the [FeeWindow Solidity Contract](https://github.com/AugurProject/augur-core/blob/master/source/contracts/reporting/FeeWindow.sol), which allows for the buying and redeeming of [Participation Tokens](#participation-token).
+Provides JavaScript bindings for the [FeeWindow Solidity Contract](https://github.com/AugurProject/augur/blob/master/packages/augur-core/source/contracts/reporting/DisputeWindow.sol), which allows for the buying and redeeming of [Participation Tokens](#participation-token).
 
 ### augur.api.FeeWindow.getEndTime(p, callback)
 
@@ -793,7 +793,7 @@ augur.api.InitialReporter.isInvalid({
 // example output:
 true
 ```
-Provides JavaScript bindings for the [InitialReporter Solidity Contract](https://github.com/AugurProject/augur-core/blob/master/source/contracts/reporting/InitialReporter.sol), which enables functionality related to [Initial Reports](#initial-report).
+Provides JavaScript bindings for the [InitialReporter Solidity Contract](https://github.com/AugurProject/augur/blob/master/packages/augur-core/source/contracts/reporting/InitialReporter.sol), which enables functionality related to [Initial Reports](#initial-report).
 
 ### augur.api.InitialReporter.designatedReporterShowed(p, callback)
 
@@ -1248,7 +1248,7 @@ augur.api.Market.isInvalid({
 // example output:
 true
 ```
-Provides JavaScript bindings for the [Market Solidity Contract](https://github.com/AugurProject/augur-core/blob/master/source/contracts/reporting/Market.sol), which enables functionality for Augur's [Markets](#market).
+Provides JavaScript bindings for the [Market Solidity Contract](https://github.com/AugurProject/augur/blob/master/packages/augur-core/source/contracts/reporting/Market.sol), which enables functionality for Augur's [Markets](#market).
 
 ### augur.api.Market.deriveMarketCreatorFeeAmount(p, callback)
 
@@ -1335,7 +1335,7 @@ Note: Calling this function only works for retrieving a DisputeCrowdsourcer if t
 
 ### augur.api.Market.getDenominationToken(p, callback)
 
-Returns the Ethereum contract address of the token used to denominate the specified [Market](#market). A Denomination Token is the [ERC-20 Token](https://github.com/ethereum/EIPs/blob/master/EIPS/eip-20-token-standard.md) used as the currency to trade on the [Outcome](#outcome) of a [Market](#market). Currently, this function will always return the address of a [Cash](https://github.com/AugurProject/augur-core/blob/master/source/contracts/trading/Cash.sol) contract; however, Augur will eventually support other types of Denomination Tokens.
+Returns the Ethereum contract address of the token used to denominate the specified [Market](#market). A Denomination Token is the [ERC-20 Token](https://github.com/ethereum/EIPs/blob/master/EIPS/eip-20-token-standard.md) used as the currency to trade on the [Outcome](#outcome) of a [Market](#market). Currently, this function will always return the address of a [Cash](https://github.com/AugurProject/augur/blob/master/packages/augur-core/source/contracts/trading/Cash.sol) contract; however, Augur will eventually support other types of Denomination Tokens.
 
 #### **Parameters:**
 
@@ -1900,7 +1900,7 @@ augur.api.Orders.isWorsePrice({
 // example output:
 true
 ```
-Provides JavaScript bindings for the [Orders Solidity Contract](https://github.com/AugurProject/augur-core/blob/master/source/contracts/trading/Orders.sol), which handles functionality related to the [Order Book](#order-book).
+Provides JavaScript bindings for the [Orders Solidity Contract](https://github.com/AugurProject/augur/blob/master/packages/augur-core/source/contracts/trading/Orders.sol), which handles functionality related to the [Order Book](#order-book).
 
 ### augur.api.Orders.getAmount(p, callback)
 
@@ -2272,7 +2272,7 @@ augur.api.ReputationToken.getTotalTheoreticalSupply({
 });
 "11000000000000000000000000"
 ```
-Provides JavaScript bindings for the [ReputationToken Solidity Contract](https://github.com/AugurProject/augur-core/blob/master/source/contracts/reporting/ReputationToken.sol), which handles the approval, migration, and transfering of [Reputation Tokens](#rep). 
+Provides JavaScript bindings for the [ReputationToken Solidity Contract](https://github.com/AugurProject/augur/blob/master/packages/augur-core/source/contracts/reporting/ReputationToken.sol), which handles the approval, migration, and transfering of [Reputation Tokens](#rep). 
 
 The Reputation Token, or REP, is an ERC-20 token that implements all of the required functions listed in the [ERC-20 Token Standard](https://github.com/ethereum/EIPs/blob/master/EIPS/eip-20-token-standard.md). It does not, however, implement the optional functions.
 
@@ -2375,7 +2375,7 @@ augur.api.ShareToken.getOutcome({
 // example output:
 "1"
 ```
-Provides JavaScript bindings for the [ShareToken Solidity Code](https://github.com/AugurProject/augur-core/blob/master/source/contracts/trading/ShareToken.sol), which handles the approval and transferring of [Shares](#share) in Augur. 
+Provides JavaScript bindings for the [ShareToken Solidity Code](https://github.com/AugurProject/augur/blob/master/packages/augur-core/source/contracts/trading/ShareToken.sol), which handles the approval and transferring of [Shares](#share) in Augur. 
 
 The Share Token is an ERC-20 token that implements all of the required functions listed in the [ERC-20 Token Standard](https://github.com/ethereum/EIPs/blob/master/EIPS/eip-20-token-standard.md). It does not, however, implement the optional functions. Within Augur, it represents [Shares](#share) in [Market](#market) [Outcomes](#outcome).
 
@@ -2651,7 +2651,7 @@ augur.api.Universe.isParentOf({
 // example output:
 true
 ```
-Provides JavaScript bindings for the [Universe Solidity Contract](https://github.com/AugurProject/augur-core/blob/master/source/contracts/reporting/Universe.sol), which allows for the creation of [Markets](#market) and provides functions for obtaining information about a given [Universe](#universe).
+Provides JavaScript bindings for the [Universe Solidity Contract](https://github.com/AugurProject/augur/blob/master/packages/augur-core/source/contracts/reporting/Universe.sol), which allows for the creation of [Markets](#market) and provides functions for obtaining information about a given [Universe](#universe).
 
 ### augur.api.Universe.getChildUniverse(p, callback)
 

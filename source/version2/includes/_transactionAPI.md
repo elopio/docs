@@ -249,11 +249,11 @@ augur.api.Augur.createGenesisUniverse({
   onFailed: function (result) { console.log(result); }
 });
 ```
-Provides JavaScript bindings for the [Augur Solidity Contract](https://github.com/AugurProject/augur-core/blob/master/source/contracts/Augur.sol), which handles [Universe](#universe) creation and event logging.
+Provides JavaScript bindings for the [Augur Solidity Contract](https://github.com/AugurProject/augur/blob/master/packages/augur-core/source/contracts/Augur.sol), which handles [Universe](#universe) creation and event logging.
 
 ### augur.api.Augur.createGenesisUniverse(p)
 
-Allows the caller to create a new [Genesis Universe](#genesis-universe). Users may wish to create a new Genesis Universe if, for example, they would like to create a separate [Universe](#universe) to compete with an existing Universe. Whenever a new Genesis Universe is created, it does not initially contain any [Markets](#market) or [REP](#rep) supply. In order to add a supply of REP, users must migrate their [Legacy REP](#legacy-rep) from the [Legacy REP smart contract](https://github.com/AugurProject/augur-core/blob/master/source/contracts/LegacyReputationToken.sol) into the [Reputation Token smart contract](https://github.com/AugurProject/augur-core/blob/master/source/contracts/reporting/ReputationToken.sol) of the new Genesis Universe using the function `augur.api.ReputationToken.migrateFromLegacyReputationToken`.
+Allows the caller to create a new [Genesis Universe](#genesis-universe). Users may wish to create a new Genesis Universe if, for example, they would like to create a separate [Universe](#universe) to compete with an existing Universe. Whenever a new Genesis Universe is created, it does not initially contain any [Markets](#market) or [REP](#rep) supply. In order to add a supply of REP, users must migrate their [Legacy REP](#legacy-rep) from the [Legacy REP smart contract](https://github.com/AugurProject/augur/blob/master/packages/augur-core/source/contracts/LegacyReputationToken.sol) into the [Reputation Token smart contract](https://github.com/AugurProject/augur/blob/master/packages/augur-core/source/contracts/reporting/ReputationToken.sol) of the new Genesis Universe using the function `augur.api.ReputationToken.migrateFromLegacyReputationToken`.
 
 #### **Parameters:**
 
@@ -296,7 +296,7 @@ augur.api.CancelOrder.cancelOrder({
   onFailed: function (result) { console.log(result); }
 });
 ```
-Provides JavaScript bindings for the [CancelOrder Solidity Contract](https://github.com/AugurProject/augur-core/blob/master/source/contracts/trading/CancelOrder.sol), which allows for cancellation of [Orders](#order) on the [Order Book](#order-book).
+Provides JavaScript bindings for the [CancelOrder Solidity Contract](https://github.com/AugurProject/augur/blob/master/packages/augur-core/source/contracts/trading/CancelOrder.sol), which allows for cancellation of [Orders](#order) on the [Order Book](#order-book).
 
 ### augur.api.CancelOrder.cancelOrder(p)
 
@@ -409,7 +409,7 @@ augur.api.Cash.withdrawEtherToIfPossible({
   onFailed: function (result) { console.log(result); }
 });
 ```
-Provides JavaScript bindings for the [Cash Solidity Contract](https://github.com/AugurProject/augur-core/blob/master/source/contracts/trading/Cash.sol), which is used internally by Augur as an ERC-20 wrapper for ETH.
+Provides JavaScript bindings for the [Cash Solidity Contract](https://github.com/AugurProject/augur/tree/master/packages/augur-core/source/contracts/trading/Cash.sol), which is used internally by Augur as an ERC-20 wrapper for ETH.
 
 ### augur.api.Cash.approve(p)
 
@@ -537,7 +537,7 @@ augur.api.ClaimTradingProceeds.claimTradingProceeds({
   onFailed: function (result) { console.log(result); }
 });
 ```
-Provides JavaScript bindings for the [ClaimTradingProceeds Solidity Contract](https://github.com/AugurProject/augur-core/blob/master/source/contracts/trading/ClaimTradingProceeds.sol), which allows profits earned from trading to be claimed.
+Provides JavaScript bindings for the [ClaimTradingProceeds Solidity Contract](https://github.com/AugurProject/augur/tree/master/packages/augur-core/source/contracts/trading/ClaimTradingProceeds.sol), which allows profits earned from trading to be claimed.
 
 ### augur.api.ClaimTradingProceeds.calculateReportingFee(p)
 
@@ -665,7 +665,7 @@ augur.api.CompleteSets.publicSellCompleteSetsWithCash({
   onFailed: function (result) { console.log(result); }
 });
 ```
-Provides JavaScript bindings for the [CompleteSets Solidity Contract](https://github.com/AugurProject/augur-core/blob/master/source/contracts/trading/CompleteSets.sol), which allows for buying and selling of [Complete Sets](#complete-set).
+Provides JavaScript bindings for the [CompleteSets Solidity Contract](https://github.com/AugurProject/augur/tree/master/packages/augur-core/source/contracts/trading/CompleteSets.sol), which allows for buying and selling of [Complete Sets](#complete-set).
 
 ### augur.api.CompleteSets.publicBuyCompleteSets(p)
 
@@ -803,7 +803,7 @@ augur.api.CreateOrder.publicCreateOrder({
   onFailed: function (result) { console.log(result); }
 });
 ```
-Provides JavaScript bindings for the [CreateOrder Solidity Contract](https://github.com/AugurProject/augur-core/blob/master/source/contracts/trading/CreateOrder.sol), which enables new [Orders](#order) to be created.
+Provides JavaScript bindings for the [CreateOrder Solidity Contract](https://github.com/AugurProject/augur/tree/master/packages/augur-core/source/contracts/trading/CreateOrder.sol), which enables new [Orders](#order) to be created.
 
 ### augur.api.CreateOrder.publicCreateOrder(p)
 
@@ -884,7 +884,7 @@ augur.api.DisputeCrowdsourcer.redeem({
   onFailed: function (result) { console.log(result); }
 });
 ```
-Provides JavaScript bindings for the [DisputeCrowdsourcer Solidity Contract](https://github.com/AugurProject/augur-core/blob/master/source/contracts/reporting/DisputeCrowdsourcer.sol), which allows users to [Stake](#dispute-stake) and redeem [REP](#rep) on [Outcomes](#outcome) other than a [Market's](#market) [Tentative Outcome](#tentative-outcome).
+Provides JavaScript bindings for the [DisputeCrowdsourcer Solidity Contract](https://github.com/AugurProject/augur/tree/master/packages/augur-core/source/contracts/reporting/DisputeCrowdsourcer.sol), which allows users to [Stake](#dispute-stake) and redeem [REP](#rep) on [Outcomes](#outcome) other than a [Market's](#market) [Tentative Outcome](#tentative-outcome).
 
 ### augur.api.DisputeCrowdsourcer.forkAndRedeem(p)
 
@@ -993,7 +993,7 @@ augur.api.FeeWindow.redeem({
   onFailed: function (result) { console.log(result); }
 });
 ```
-Provides JavaScript bindings for the [FeeWindow Solidity Contract](https://github.com/AugurProject/augur-core/blob/master/source/contracts/reporting/FeeWindow.sol), which allows for the buying and redeeming of [Participation Tokens](#participation-token).
+Provides JavaScript bindings for the [FeeWindow Solidity Contract](https://github.com/AugurProject/augur/tree/master/packages/augur-core/source/contracts/reporting/FeeWindow.sol), which allows for the buying and redeeming of [Participation Tokens](#participation-token).
 
 ### augur.api.FeeWindow.buy(p)
 
@@ -1077,7 +1077,7 @@ augur.api.FillOrder.publicFillOrder({
   onFailed: function (result) { console.log(result); }
 });
 ```
-Provides JavaScript bindings for the [FillOrder Solidity Contract](https://github.com/AugurProject/augur-core/blob/master/source/contracts/trading/FillOrder.sol), which allows for the [Filling](#fill-order) of [Orders](#order) on the [Order Book](#order-book).
+Provides JavaScript bindings for the [FillOrder Solidity Contract](https://github.com/AugurProject/augur/tree/master/packages/augur-core/source/contracts/trading/FillOrder.sol), which allows for the [Filling](#fill-order) of [Orders](#order) on the [Order Book](#order-book).
 
 ### augur.api.FillOrder.publicFillOrder(p)
 
@@ -1163,7 +1163,7 @@ augur.api.InitialReporter.transferOwnership({
   onFailed: function (result) { console.log(result); }
 });
 ```
-Provides JavaScript bindings for the [InitialReporter Solidity Contract](https://github.com/AugurProject/augur-core/blob/master/source/contracts/reporting/InitialReporter.sol), which enables functionality related to [Initial Reports](#initial-report).
+Provides JavaScript bindings for the [InitialReporter Solidity Contract](https://github.com/AugurProject/augur/tree/master/packages/augur-core/source/contracts/reporting/InitialReporter.sol), which enables functionality related to [Initial Reports](#initial-report).
 
 ### augur.api.InitialReporter.forkAndRedeem(p)
 
@@ -1295,7 +1295,7 @@ augur.api.Mailbox.withdrawTokens({
   onFailed: function (result) { console.log(result); }
 });
 ```
-Provides JavaScript bindings for the [Mailbox Solidity Contract](https://github.com/AugurProject/augur-core/blob/master/source/contracts/reporting/Mailbox.sol), which enables the functionality of the [Market Creator Mailbox](#market-creator-mailbox).
+Provides JavaScript bindings for the [Mailbox Solidity Contract](https://github.com/AugurProject/augur/tree/master/packages/augur-core/source/contracts/reporting/Mailbox.sol), which enables the functionality of the [Market Creator Mailbox](#market-creator-mailbox).
 
 ### augur.api.Mailbox.transferOwnership(p)
 
@@ -1355,7 +1355,7 @@ This transaction will fail if:
 #### **Parameters:**
 
 * **`p`** (Object) Parameters object.
-    * **`p._token`** (string) Ethereum address of an [ERC20Basic](https://github.com/AugurProject/augur-core/blob/master/source/contracts/libraries/token/ERC20Basic.sol) token contract, as a 20-byte hexadecimal value.
+    * **`p._token`** (string) Ethereum address of an [ERC20Basic](https://github.com/AugurProject/augur/tree/master/packages/augur-core/source/contracts/libraries/token/ERC20Basic.sol) token contract, as a 20-byte hexadecimal value.
     * **`p.tx`** (Object) Object containing details about how this transaction should be made.
         * **`p.tx.to`** (string) Ethereum contract address on which to call this function, as a 20-byte hexadecimal string.
         * **`p.tx.gas`** (string) Gas limit to use when submitting this transaction, as a hexadecimal string.
@@ -1488,7 +1488,7 @@ augur.api.Market.transferOwnership({
   onFailed: function (result) { console.log(result); }
 });
 ```
-Provides JavaScript bindings for the [Market Solidity Contract](https://github.com/AugurProject/augur-core/blob/master/source/contracts/reporting/Market.sol), which enables functionality for Augur's [Markets](#market).
+Provides JavaScript bindings for the [Market Solidity Contract](https://github.com/AugurProject/augur/tree/master/packages/augur-core/source/contracts/reporting/Market.sol), which enables functionality for Augur's [Markets](#market).
 
 ### augur.api.Market.contribute(p)
 
@@ -1839,7 +1839,7 @@ augur.api.ReputationToken.updateTotalTheoreticalSupply({
   onFailed: function (result) { console.log(result); }
 });
 ```
-Provides JavaScript bindings for the [ReputationToken Solidity Contract](https://github.com/AugurProject/augur-core/blob/master/source/contracts/reporting/ReputationToken.sol), which handles the approval, migration, and transfering of [Reputation Tokens](#rep).
+Provides JavaScript bindings for the [ReputationToken Solidity Contract](https://github.com/AugurProject/augur/tree/master/packages/augur-core/source/contracts/reporting/ReputationToken.sol), which handles the approval, migration, and transfering of [Reputation Tokens](#rep).
 
 The Reputation Token, or REP, is an ERC-20 token that implements all of the required functions listed in the [ERC-20 Token Standard](https://github.com/ethereum/EIPs/blob/master/EIPS/eip-20-token-standard.md). It does not, however, implement the optional functions.
 
@@ -1908,7 +1908,7 @@ Increases the amount of [REP](#rep) `p._spender` is approved to spend on behalf 
 
 ### augur.api.ReputationToken.migrateFromLegacyReputationToken(p)
 
-Migrates [Legacy REP](#legacy-rep) tokens owned by `msg.sender` from the Legacy REP contract to the `reputationToken` provided. This transaction will add whatever `msg.sender`'s balance was for the [Legacy REP contract](#https://github.com/AugurProject/augur-core/blob/master/source/contracts/LegacyReputationToken.sol) to the `reputationToken` contract.
+Migrates [Legacy REP](#legacy-rep) tokens owned by `msg.sender` from the Legacy REP contract to the `reputationToken` provided. This transaction will add whatever `msg.sender`'s balance was for the [Legacy REP contract](https://github.com/AugurProject/augur/blob/master/packages/augur-core/source/contracts/LegacyReputationToken.sol) to the `reputationToken` contract.
 
 #### **Parameters:**
 
@@ -2149,7 +2149,7 @@ augur.api.ShareToken.transferFrom({
   onFailed: function (result) { console.log(result); }
 });
 ```
-Provides JavaScript bindings for the [ShareToken Solidity Code](https://github.com/AugurProject/augur-core/blob/master/source/contracts/trading/ShareToken.sol), which handles the approval and transferring of [Shares](#share) in Augur. 
+Provides JavaScript bindings for the [ShareToken Solidity Code](https://github.com/AugurProject/augur/blob/master/packages/augur-core/source/contracts/trading/ShareToken.sol), which handles the approval and transferring of [Shares](#share) in Augur. 
 
 The Share Token is an ERC-20 token that implements all of the required functions listed in the [ERC-20 Token Standard](https://github.com/ethereum/EIPs/blob/master/EIPS/eip-20-token-standard.md). It does not, however, implement the optional functions. Within Augur, it represents [Shares](#share) in [Market](#market) [Outcomes](#outcome).
 
@@ -2382,7 +2382,7 @@ augur.api.Trade.publicTradeWithTotalCost({
   onFailed: function (result) { console.log(result); }
 });
 ```
-Provides JavaScript bindings for the [Trade Solidity Contract](https://github.com/AugurProject/augur-core/blob/master/source/contracts/trading/Trade.sol), which allows for the buying and selling of [Shares](#share) of a particular [Outcome](#outcome) in a [Market](#market).
+Provides JavaScript bindings for the [Trade Solidity Contract](https://github.com/AugurProject/augur/blob/master/packages/augur-core/source/contracts/trading/Trade.sol), which allows for the buying and selling of [Shares](#share) of a particular [Outcome](#outcome) in a [Market](#market).
 
 ### augur.api.Trade.publicFillBestOrder(p)
 
@@ -2766,7 +2766,7 @@ augur.api.Universe.redeemStake({
   onFailed: function (result) { console.log("onFailed result:", result); }
 });
 ```
-Provides JavaScript bindings for the [Universe Solidity Contract](https://github.com/AugurProject/augur-core/blob/master/source/contracts/reporting/Universe.sol), which allows for the creation of [Markets](#market) and provides functions for obtaining information about a given [Universe](#universe).
+Provides JavaScript bindings for the [Universe Solidity Contract](https://github.com/AugurProject/augur/blob/master/packages/augur-core/source/contracts/reporting/Universe.sol), which allows for the creation of [Markets](#market) and provides functions for obtaining information about a given [Universe](#universe).
 
 <!-- #### Notes: Transaction will fail if: the sender does not have enough ETH/REP to pay for the [Validity Bond](#validity-bond) & [No-Show Bond](#no-show-bond), `p._endTime` has already passed, `p._feesPerEthInWei` is less than 0 or greater than/equal to 0.5 ETH (5 * 10^18), `p._designatedReporterAddress` is the null address (0x0000000000000000000000000000000000000000), the length of `p._description` is not greater than 0 bytes, `value` in the `tx` object is not enough to cover the Market's Validity Bond and the estimated gas cost for the target amount of reporters to report. -->
 
@@ -2790,7 +2790,7 @@ NOTE: The account attempting to create the new market must have sufficient REP i
 * **`p`** (Object) Parameters object.
     * **`p._endTime`**  (string) Unix timestamp for the [End Time](#end-time) of the [Market](#market), as a hexadecimal string.
     * **`p._feePerEthInWei`**  (string) [Creator Fee](#creator-fee) (in Wei) that is collected for every 1 Ether worth of [Shares](#share) [Settled](#settlement), as a hexadecimal string.
-    * **`p._denominationToken`**  (string) Ethereum address of the token the Market is denominated in. Currently, Markets are only denominated in Ether (i.e., the [Cash](#cash) [contract](#https://github.com/AugurProject/augur-core/blob/master/source/contracts/trading/Cash.sol) in Augur's smart contracts), but Augur is expected to support other tokens in the future.
+    * **`p._denominationToken`**  (string) Ethereum address of the token the Market is denominated in. Currently, Markets are only denominated in Ether (i.e., the [Cash](#cash) [contract](https://github.com/AugurProject/augur/blob/master/packages/augur-core/source/contracts/trading/Cash.sol) in Augur's smart contracts), but Augur is expected to support other tokens in the future.
     * **`p._designatedReporterAddress`**  (string) Ethereum address of the [Designated Reporter](#designated-reporter).
     * **`p._outcomes`**  (Array.&lt;string>) Array of names for all possible outcomes for the Market event.
     * **`p._topic`**  (string) Market [Topic](#topic).
@@ -2860,7 +2860,7 @@ NOTE: The account attempting to create the new market must have sufficient REP i
 * **`p`** (Object) Parameters object.
     * **`p._endTime`**  (string) Unix timestamp for the [End Time](#end-time) of the [Market](#market), as a hexadecimal string.
     * **`p._feePerEthInWei`**  (string) [Creator Fee](#creator-fee) (in [attoETH](atto-prefix)) that is collected for every 1 Ether worth of [Shares](#share) [Settled](#settlement).
-    * **`p._denominationToken`**  (string) Ethereum address of the token the Market is denominated in. Currently, Markets are only denominated in Ether (i.e., the [Cash](#cash) [contract](#https://github.com/AugurProject/augur-core/blob/master/source/contracts/trading/Cash.sol) in Augur's smart contracts), but Augur is expected to support other tokens in the future.
+    * **`p._denominationToken`**  (string) Ethereum address of the token the Market is denominated in. Currently, Markets are only denominated in Ether (i.e., the [Cash](#cash) [contract](https://github.com/AugurProject/augur/blob/master/packages/augur-core/source/contracts/trading/Cash.sol) in Augur's smart contracts), but Augur is expected to support other tokens in the future.
     * **`p._designatedReporterAddress`**  (string) Ethereum address of the [Designated Reporter](#designated-reporter).
     * **`p._minPrice`**  (string) [Minimum Display Price](#minimum-display-price) for the Market, as a hexadecimal string.
     * **`p._maxPrice`**  (string) [Maximum Display Price](#maximum-display-price) for the Market, as a hexadecimal string.
@@ -2904,7 +2904,7 @@ NOTE: The account attempting to create the new market must have sufficient REP i
 * **`p`** (Object) Parameters object.
     * **`p._endTime`**  (string) Unix timestamp for the [End Time](#end-time) of the [Market](#market), as a hexadecimal string.
     * **`p._feePerEthInWei`**  (string) [Creator Fee](#creator-fee) (in Wei) that is collected for every 1 Ether worth of [Shares](#share) [Settled](#settlement), as a hexadecimal string.
-    * **`p._denominationToken`**  (string) Ethereum address of the token the Market is denominated in. Currently, Markets are only denominated in Ether (i.e., the [Cash](#cash) [contract](#https://github.com/AugurProject/augur-core/blob/master/source/contracts/trading/Cash.sol) in Augur's smart contracts), but Augur is expected to support other tokens in the future.
+    * **`p._denominationToken`**  (string) Ethereum address of the token the Market is denominated in. Currently, Markets are only denominated in Ether (i.e., the [Cash](#cash) [contract](https://github.com/AugurProject/augur/blob/master/packages/augur-core/source/contracts/trading/Cash.sol) in Augur's smart contracts), but Augur is expected to support other tokens in the future.
     * **`p._designatedReporterAddress`**  (string) Ethereum address of the [Designated Reporter](#designated-reporter).
     * **`p._topic`**  (string) Market [Topic](#topic).
     * **`p._description`**  (string) Description of the Market event.

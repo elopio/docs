@@ -193,7 +193,7 @@ If the [Outcome](#outcome) of a [Market's](#market) event does not fit any of th
 
 ## Legacy REP
 
-Legacy [Reputation Tokens](#rep), or Legacy REP, are REP that exist in the [Legacy REP smart contract](https://github.com/AugurProject/augur-core/blob/master/source/contracts/legacy_reputation/LegacyRepToken.sol) and have not been migrated to the [Reputation Token smart contract](https://github.com/AugurProject/augur-core/blob/master/source/contracts/reporting/ReputationToken.sol), for a particular [Universe](#universe). Legacy REP must be migrated to the Reputation Token smart contract by calling the `augur.api.ReputationToken.migrateFromLegacyReputationToken` function before they can be used within Augur.
+Legacy [Reputation Tokens](#rep), or Legacy REP, are REP that exist in the [Legacy REP smart contract](https://github.com/AugurProject/augur-core/blob/master/source/contracts/LegacyReputationToken.sol) and have not been migrated to the [Reputation Token smart contract](https://github.com/AugurProject/augur-core/blob/master/source/contracts/reporting/ReputationToken.sol), for a particular [Universe](#universe). Legacy REP must be migrated to the Reputation Token smart contract by calling the `augur.api.ReputationToken.migrateFromLegacyReputationToken` function before they can be used within Augur.
 
 ## Long Position
 
