@@ -10112,7 +10112,7 @@ should lose all economic value, while any REP Staked on the Market’s true Outc
 <li><strong><code class="prettyprint">p</code></strong> (Object) Parameters object.
 
 <ul>
-<li><strong><code class="prettyprint">p._token</code></strong> (string) Ethereum address of an <a href="#https://github.com/AugurProject/augur-core/blob/master/source/contracts/libraries/token/ERC20Basic.sol">ERC20Basic</a> token contract, as a 20-byte hexadecimal value.</li>
+<li><strong><code class="prettyprint">p._token</code></strong> (string) Ethereum address of an <a href="https://github.com/AugurProject/augur-core/blob/master/source/contracts/libraries/token/ERC20Basic.sol">ERC20Basic</a> token contract, as a 20-byte hexadecimal value.</li>
 <li><strong><code class="prettyprint">p.tx</code></strong> (Object) Object containing details about how this transaction should be made.
 
 <ul>
@@ -10844,7 +10844,7 @@ should lose all economic value, while any REP Staked on the Market’s true Outc
 
 <h3 id="augur-api-reputationtoken-migratefromlegacyreputationtoken-p">augur.api.ReputationToken.migrateFromLegacyReputationToken(p)</h3>
 
-<p>Migrates <a href="#legacy-rep">Legacy REP</a> tokens owned by <code class="prettyprint">msg.sender</code> from the Legacy REP contract to the <code class="prettyprint">reputationToken</code> provided. This transaction will add whatever <code class="prettyprint">msg.sender</code>&rsquo;s balance was for the <a href="#https://github.com/AugurProject/augur-core/blob/master/source/contracts/LegacyReputationToken.sol">Legacy REP contract</a> to the <code class="prettyprint">reputationToken</code> contract.</p>
+<p>Migrates <a href="#legacy-rep">Legacy REP</a> tokens owned by <code class="prettyprint">msg.sender</code> from the <a href="https://github.com/AugurProject/augur-core/blob/master/source/contracts/LegacyReputationToken.sol">Legacy REP contract</a> to the <code class="prettyprint">reputationToken</code> provided. This transaction will add whatever <code class="prettyprint">msg.sender</code>&rsquo;s balance was for the Legacy REP contract to the <code class="prettyprint">reputationToken</code> contract.</p>
 
 <h4 id="strong-strong"><strong>Parameters:</strong></h4>
 
@@ -12290,7 +12290,7 @@ should lose all economic value, while any REP Staked on the Market’s true Outc
 <ul>
 <li><strong><code class="prettyprint">p._endTime</code></strong>  (string) Unix timestamp for the <a href="#end-time">End Time</a> of the <a href="#market">Market</a>, as a hexadecimal string.</li>
 <li><strong><code class="prettyprint">p._feePerEthInWei</code></strong>  (string) <a href="#creator-fee">Creator Fee</a> (in Wei) that is collected for every 1 Ether worth of <a href="#share">Shares</a> <a href="#settlement">Settled</a>, as a hexadecimal string.</li>
-<li><strong><code class="prettyprint">p._denominationToken</code></strong>  (string) Ethereum address of the token the Market is denominated in. Currently, Markets are only denominated in Ether (i.e., the <a href="#cash">Cash</a> <a href="#https://github.com/AugurProject/augur-core/blob/master/source/contracts/trading/Cash.sol">contract</a> in Augur&rsquo;s smart contracts), but Augur is expected to support other tokens in the future.</li>
+<li><strong><code class="prettyprint">p._denominationToken</code></strong>  (string) Ethereum address of the token the Market is denominated in. Currently, Markets are only denominated in Ether (i.e., the <a href="#cash">Cash</a> <a href="https://github.com/AugurProject/augur-core/blob/master/source/contracts/trading/Cash.sol">contract</a> in Augur&rsquo;s smart contracts), but Augur is expected to support other tokens in the future.</li>
 <li><strong><code class="prettyprint">p._designatedReporterAddress</code></strong>  (string) Ethereum address of the <a href="#designated-reporter">Designated Reporter</a>.</li>
 <li><strong><code class="prettyprint">p._outcomes</code></strong>  (Array.&lt;string&gt;) Array of names for all possible outcomes for the Market event.</li>
 <li><strong><code class="prettyprint">p._topic</code></strong>  (string) Market <a href="#topic">Topic</a>.</li>
@@ -12386,7 +12386,7 @@ should lose all economic value, while any REP Staked on the Market’s true Outc
 <ul>
 <li><strong><code class="prettyprint">p._endTime</code></strong>  (string) Unix timestamp for the <a href="#end-time">End Time</a> of the <a href="#market">Market</a>, as a hexadecimal string.</li>
 <li><strong><code class="prettyprint">p._feePerEthInWei</code></strong>  (string) <a href="#creator-fee">Creator Fee</a> (in <a href="atto-prefix">attoETH</a>) that is collected for every 1 Ether worth of <a href="#share">Shares</a> <a href="#settlement">Settled</a>.</li>
-<li><strong><code class="prettyprint">p._denominationToken</code></strong>  (string) Ethereum address of the token the Market is denominated in. Currently, Markets are only denominated in Ether (i.e., the <a href="#cash">Cash</a> <a href="#https://github.com/AugurProject/augur-core/blob/master/source/contracts/trading/Cash.sol">contract</a> in Augur&rsquo;s smart contracts), but Augur is expected to support other tokens in the future.</li>
+<li><strong><code class="prettyprint">p._denominationToken</code></strong>  (string) Ethereum address of the token the Market is denominated in. Currently, Markets are only denominated in Ether (i.e., the <a href="#cash">Cash</a> <a href="https://github.com/AugurProject/augur-core/blob/master/source/contracts/trading/Cash.sol">contract</a> in Augur&rsquo;s smart contracts), but Augur is expected to support other tokens in the future.</li>
 <li><strong><code class="prettyprint">p._designatedReporterAddress</code></strong>  (string) Ethereum address of the <a href="#designated-reporter">Designated Reporter</a>.</li>
 <li><strong><code class="prettyprint">p._minPrice</code></strong>  (string) <a href="#minimum-display-price">Minimum Display Price</a> for the Market, as a hexadecimal string.</li>
 <li><strong><code class="prettyprint">p._maxPrice</code></strong>  (string) <a href="#maximum-display-price">Maximum Display Price</a> for the Market, as a hexadecimal string.</li>
@@ -12444,7 +12444,7 @@ should lose all economic value, while any REP Staked on the Market’s true Outc
 <ul>
 <li><strong><code class="prettyprint">p._endTime</code></strong>  (string) Unix timestamp for the <a href="#end-time">End Time</a> of the <a href="#market">Market</a>, as a hexadecimal string.</li>
 <li><strong><code class="prettyprint">p._feePerEthInWei</code></strong>  (string) <a href="#creator-fee">Creator Fee</a> (in Wei) that is collected for every 1 Ether worth of <a href="#share">Shares</a> <a href="#settlement">Settled</a>, as a hexadecimal string.</li>
-<li><strong><code class="prettyprint">p._denominationToken</code></strong>  (string) Ethereum address of the token the Market is denominated in. Currently, Markets are only denominated in Ether (i.e., the <a href="#cash">Cash</a> <a href="#https://github.com/AugurProject/augur-core/blob/master/source/contracts/trading/Cash.sol">contract</a> in Augur&rsquo;s smart contracts), but Augur is expected to support other tokens in the future.</li>
+<li><strong><code class="prettyprint">p._denominationToken</code></strong>  (string) Ethereum address of the token the Market is denominated in. Currently, Markets are only denominated in Ether (i.e., the <a href="#cash">Cash</a> <a href="https://github.com/AugurProject/augur-core/blob/master/source/contracts/trading/Cash.sol">contract</a> in Augur&rsquo;s smart contracts), but Augur is expected to support other tokens in the future.</li>
 <li><strong><code class="prettyprint">p._designatedReporterAddress</code></strong>  (string) Ethereum address of the <a href="#designated-reporter">Designated Reporter</a>.</li>
 <li><strong><code class="prettyprint">p._topic</code></strong>  (string) Market <a href="#topic">Topic</a>.</li>
 <li><strong><code class="prettyprint">p._description</code></strong>  (string) Description of the Market event.</li>
@@ -14997,7 +14997,7 @@ Goals:
 
 <h2 id="legacy-rep">Legacy REP</h2>
 
-<p>Legacy <a href="#rep">Reputation Tokens</a>, or Legacy REP, are REP that exist in the <a href="https://github.com/AugurProject/augur-core/blob/master/source/contracts/legacy_reputation/LegacyRepToken.sol">Legacy REP smart contract</a> and have not been migrated to the <a href="https://github.com/AugurProject/augur-core/blob/master/source/contracts/reporting/ReputationToken.sol">Reputation Token smart contract</a>, for a particular <a href="#universe">Universe</a>. Legacy REP must be migrated to the Reputation Token smart contract by calling the <code class="prettyprint">augur.api.ReputationToken.migrateFromLegacyReputationToken</code> function before they can be used within Augur.</p>
+<p>Legacy <a href="#rep">Reputation Tokens</a>, or Legacy REP, are REP that exist in the <a href="https://github.com/AugurProject/augur-core/blob/master/source/contracts/LegacyReputationToken.sol">Legacy REP smart contract</a> and have not been migrated to the <a href="https://github.com/AugurProject/augur-core/blob/master/source/contracts/reporting/ReputationToken.sol">Reputation Token smart contract</a>, for a particular <a href="#universe">Universe</a>. Legacy REP must be migrated to the Reputation Token smart contract by calling the <code class="prettyprint">augur.api.ReputationToken.migrateFromLegacyReputationToken</code> function before they can be used within Augur.</p>
 
 <h2 id="long-position">Long Position</h2>
 
