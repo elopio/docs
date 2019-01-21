@@ -189,7 +189,16 @@ The Initial Reporter is the person who submits the [Initial Report](#initial-rep
 
 ## Invalid Outcome
 
-If the [Outcome](#outcome) of a [Market's](#market) event does not fit any of the Outcomes set for that Market, or if the Market's question is worded in a way that is vague or does not have a clear answer, [Reporters](#reporters) can [Report](#report) its [Tentative Outcome](#tentative-outcome) as Invalid. Additionally, if the Market is in a [Dispute Round](#dispute-round), users can [Stake](#dispute-stake) [REP](#rep) on Invalid as the Tentative Outcome, or if the Market has [Forked](#fork), users can migrate their REP to the [Child Universe](#child-universe) where the Outcome is Invalid. If the Market's [Final Outcome](#final-outcome) becomes Invalid, its [Payout Set](#payout-set) will be the [Number of Ticks](#number-of-ticks) divided evenly among each Outcome. For example, in a [Categorical Market](#categorical-market) with 10,000 [Ticks](#tick) and 4 potential Outcomes, the Payout Set would be [2500, 2500, 2500, 2500]. This is done to ensure that the holders for each type of [Share](#share) in the Market receive the same payout during [Settlement](#settlement).
+A [Market](#market) should be considered Invalid if any of the following are true:
+
+  - The question is subjective in nature.
+  - The outcome was not known at market end time.
+  - The title, details, end time, resolution source, and outcomes are in direct conflict with each other.
+  - There are strong arguments for the market resolving as multiple outcomes.
+  - The resolution source does not provide a readily available answer.
+  - The resolution source provides different answers to different viewers.
+
+If the [Outcome](#outcome) of a Market is Invalid, [Reporters](#reporters) can [Report](#report) its [Tentative Outcome](#tentative-outcome) as Invalid. Additionally, if the Market is in a [Dispute Round](#dispute-round), users can [Stake](#dispute-stake) [REP](#rep) on Invalid as the Tentative Outcome, or if the Market has [Forked](#fork), users can migrate their REP to the [Child Universe](#child-universe) where the Outcome is Invalid. If the Market's [Final Outcome](#final-outcome) becomes Invalid, its [Payout Set](#payout-set) will be the [Number of Ticks](#number-of-ticks) divided evenly among each Outcome. For example, in a [Categorical Market](#categorical-market) with 10,000 [Ticks](#tick) and 4 potential Outcomes, the Payout Set would be [2500, 2500, 2500, 2500]. This is done to ensure that the holders for each type of [Share](#share) in the Market receive the same payout during [Settlement](#settlement).
 
 ## Legacy REP
 
