@@ -14993,7 +14993,18 @@ Goals:
 
 <h2 id="invalid-outcome">Invalid Outcome</h2>
 
-<p>If the <a href="#outcome">Outcome</a> of a <a href="#market">Market&rsquo;s</a> event does not fit any of the Outcomes set for that Market, or if the Market&rsquo;s question is worded in a way that is vague or does not have a clear answer, <a href="#reporters">Reporters</a> can <a href="#report">Report</a> its <a href="#tentative-outcome">Tentative Outcome</a> as Invalid. Additionally, if the Market is in a <a href="#dispute-round">Dispute Round</a>, users can <a href="#dispute-stake">Stake</a> <a href="#rep">REP</a> on Invalid as the Tentative Outcome, or if the Market has <a href="#fork">Forked</a>, users can migrate their REP to the <a href="#child-universe">Child Universe</a> where the Outcome is Invalid. If the Market&rsquo;s <a href="#final-outcome">Final Outcome</a> becomes Invalid, its <a href="#payout-set">Payout Set</a> will be the <a href="#number-of-ticks">Number of Ticks</a> divided evenly among each Outcome. For example, in a <a href="#categorical-market">Categorical Market</a> with 10,000 <a href="#tick">Ticks</a> and 4 potential Outcomes, the Payout Set would be [2500, 2500, 2500, 2500]. This is done to ensure that the holders for each type of <a href="#share">Share</a> in the Market receive the same payout during <a href="#settlement">Settlement</a>.</p>
+<p>A <a href="#market">Market</a> should be considered Invalid if any of the following are true:</p>
+
+<ul>
+<li>The question is subjective in nature.</li>
+<li>The outcome was not known at market end time.</li>
+<li>The title, details, end time, resolution source, and outcomes are in direct conflict with each other.</li>
+<li>There are strong arguments for the market resolving as multiple outcomes.</li>
+<li>The resolution source does not provide a readily available answer.</li>
+<li>The resolution source provides different answers to different viewers.</li>
+</ul>
+
+<p>If the <a href="#outcome">Outcome</a> of a Market is Invalid, <a href="#reporters">Reporters</a> can <a href="#report">Report</a> its <a href="#tentative-outcome">Tentative Outcome</a> as Invalid. Additionally, if the Market is in a <a href="#dispute-round">Dispute Round</a>, users can <a href="#dispute-stake">Stake</a> <a href="#rep">REP</a> on Invalid as the Tentative Outcome, or if the Market has <a href="#fork">Forked</a>, users can migrate their REP to the <a href="#child-universe">Child Universe</a> where the Outcome is Invalid. If the Market&rsquo;s <a href="#final-outcome">Final Outcome</a> becomes Invalid, its <a href="#payout-set">Payout Set</a> will be the <a href="#number-of-ticks">Number of Ticks</a> divided evenly among each Outcome. For example, in a <a href="#categorical-market">Categorical Market</a> with 10,000 <a href="#tick">Ticks</a> and 4 potential Outcomes, the Payout Set would be [2500, 2500, 2500, 2500]. This is done to ensure that the holders for each type of <a href="#share">Share</a> in the Market receive the same payout during <a href="#settlement">Settlement</a>.</p>
 
 <h2 id="legacy-rep">Legacy REP</h2>
 
