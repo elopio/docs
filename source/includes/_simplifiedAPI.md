@@ -2230,24 +2230,42 @@ augur.trading.getUserTradingHistory({
 ]
 
 augur.trading.getUserTradingPositions({
-  account: "0x000000000000000000000000000000000000d00d",
+  universe: "0x000000000000000000000000000000000000000b",
+  account: "0xffff000000000000000000000000000000000000",
   marketId: "0x0000000000000000000000000000000000000ff1",
+  endTime: 1534435013,
 }, function (error, result) {
   console.log(result);
 });
 // example output:
 [
   {
-    averagePrice: "26.99662542182234436667",
+    averagePrice: "0",
     cost: "0.00809898762654670331",
     marketId: "0x0000000000000000000000000000000000000ff1",
-    netPosition: "-0.0003",
+    netPosition: "0",
+    numEscrowed: "0.0003",
+    outcome: 0,
+    position: "0.0003",
+    realized: "54999999999.56442531007152770894",
+    timestamp: 1534435013,
+    total: "54999999999.56442531007152770894",
+    totalPosition: "0.0006",
+    unrealized: "0",
+  },
+  {
+    averagePrice: "13.49831271091117218333",
+    cost: "0",
+    marketId: "0x0000000000000000000000000000000000000ff1",
+    netPosition: "-0.0006",
     outcome: 1,
     position: "0",
     realized: "54999999999.56442531007152770894",
     timestamp: 1534435013,
-    total: "54999999999.56442531007152770894",
-    unrealized: "0",
+    total: "0.188401012373453296690002",
+    totalPosition: "0",
+    numEscrowed: "0",
+    unrealized: "0.188401012373453296690002",
   },
 ]
 
@@ -2746,7 +2764,8 @@ This function will fail if:
     * **`p.account`**  (string) Ethereum address of the user for which to retrieve trading positions, as a 20-byte hexadecimal string.
     * **`p.universe`**  (string) &lt;optional> Contract address of the [Universe](#universe) in which to look up the trading positions, as a 20-byte hexadecimal string. Either this parameter or the Market ID must be specified.
     * **`p.marketId`**  (string) &lt;optional> Contract address of the [Market](#market) in which to look up the trading positions, as a 20-byte hexadecimal string. Either this parameter or the Universe must be specified.
-    * **`p.outcome`**  (number) [Outcome](#outcome) of the [Share](#share) held for the Market. Valid values are in the range [0,7].
+    * **`p.outcome`**  (number) &lt;optional> [Outcome](#outcome) of the [Share](#share) held for the Market. Valid values are in the range [0,7].
+    * **`p.endTime`**  (number) &lt;optional> Unix timestamp after which user trading positions will be filtered from returned results. Defaults to the current timestamp.
     * **`p.sortBy`**  (string) &lt;optional> Field name by which to sort the trading positions.
     * **`p.isSortDescending`**  (boolean) &lt;optional> Whether to sort the trading positions in descending order by `sortBy` field.
     * **`p.limit`**  (number) &lt;optional> Maximum number of trading positions reports to return.

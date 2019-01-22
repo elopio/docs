@@ -643,12 +643,14 @@ Serves as an enum for the state of a Market.
 * **`averagePrice`** (string) Average price paid to acquire this position, in ETH.
 * **`cost`** (string) Cost per Share to acquire this position, in ETH.
 * **`marketId`** (string) Contract address of the Market, as a hexadecimal string.
-* **`netPosition`** (string) Number of virtual Shares the user owns (when short on `outcome`).
+* **`netPosition`** (string) `position` adjusted when a Short Position exists. For example, if the user has a Short Position (defined as having a `totalPosition` > 0 for all but one Outcome), the `netPosition` of all `totalPosition` > 0 Outcomes is `totalPosition` - min(`totalPosition`s), and the `netPosition` for the Outcome with a `totalPosition` of 0 is min(`totalPosition`s).
+* **`numEscrowed`** (string) Number of Shares in `outcome` the user has escrowed for Open Orders.
 * **`outcome`** (number) Outcome of the Shares the user owns.
-* **`position`** (string) Number of Shares of `outcome` that the user holds.
+* **`position`** (string) Raw number of Shares in `outcome` that the user holds.
 * **`realized`** (string) ETH profit or loss the user took upon closing this position.
 * **`timestamp`** (number) Unix timestamp when user's trade position last changed. (If the user has no position, this is the current block time.)
 * **`total`** (string) The sum of `realized` and `unrealized`.
+* **`totalPosition`** (string) `position` plus `numEscrowed`.
 * **`unrealized`** (string) Profit or loss the user would take if they closed their position at the last trade price, in ETH.
 
 <a name="WebSocket"></a>
