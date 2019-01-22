@@ -192,9 +192,9 @@ The Initial Reporter is the person who submits the [Initial Report](#initial-rep
 A [Market](#market) should be considered Invalid if any of the following are true:
 
   - The question is subjective in nature.
-  - The outcome was not known at market end time.
-  - The title, details, end time, resolution source, and outcomes are in direct conflict with each other.
-  - There are strong arguments for the market resolving as multiple outcomes.
+  - The Outcome was not known at Market [End Time](#end-time).
+  - The title, details, End Time, resolution source, and Outcomes are in direct conflict with each other.
+  - There are strong arguments for the Market resolving as multiple Outcomes.
   - The resolution source does not provide a readily available answer.
   - The resolution source provides different answers to different viewers.
 
