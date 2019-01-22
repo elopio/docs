@@ -650,7 +650,7 @@ Serves as an enum for the state of a Market.
 * **`realized`** (string) ETH profit or loss the user took upon closing this position.
 * **`timestamp`** (number) Unix timestamp when user's trade position last changed. (If the user has no position, this is the current block time.)
 * **`total`** (string) The sum of `realized` and `unrealized`.
-* **`totalPosition`** (string) `position` plus `numEscrowed`.
+* **`totalPosition`** (string) The sum of `position` and `numEscrowed`.
 * **`unrealized`** (string) Profit or loss the user would take if they closed their position at the last trade price, in ETH.
 
 <a name="WebSocket"></a>
