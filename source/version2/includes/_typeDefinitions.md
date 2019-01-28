@@ -622,7 +622,7 @@ Serves as an enum for the state of a Market.
 * **`transactionHash`** (string) Hash to look up the trade transaction receipt.
 * **`logIndex`** (number) Number of the log index position in the Ethereum block containing the trade transaction.
 * **`orderId`** (string) Unique ID for the Order, as a hexadecimal string.
-* **`type`** (string) Type of trade. Valid values are "buy" and "sell".
+* **`type`** (string) Type of trade, from the perspective of the Order maker. Valid values are "buy" and "sell".
 * **`price`** (string) Price paid for trade, in attoETH.
 * **`amount`** (string) Amount of Share Units that were bought/sold.
 * **`maker`** (boolean) Whether the specified user is the order maker (as opposed to filler).
