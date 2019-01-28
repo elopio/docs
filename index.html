@@ -3283,18 +3283,18 @@ should lose all economic value, while any REP Staked on the Market’s true Outc
     <span class="na">unrealized</span><span class="p">:</span> <span class="s2">"0"</span><span class="p">,</span>
   <span class="p">},</span>
   <span class="p">{</span>
-    <span class="na">averagePrice</span><span class="p">:</span> <span class="s2">"13.49831271091117218333"</span><span class="p">,</span>
+    <span class="na">averagePrice</span><span class="p">:</span> <span class="s2">"386.50168728908882781667"</span><span class="p">,</span>
     <span class="na">cost</span><span class="p">:</span> <span class="s2">"0"</span><span class="p">,</span>
     <span class="na">marketId</span><span class="p">:</span> <span class="s2">"0x0000000000000000000000000000000000000ff1"</span><span class="p">,</span>
     <span class="na">netPosition</span><span class="p">:</span> <span class="s2">"-0.0006"</span><span class="p">,</span>
     <span class="na">outcome</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
     <span class="na">position</span><span class="p">:</span> <span class="s2">"0"</span><span class="p">,</span>
-    <span class="na">realized</span><span class="p">:</span> <span class="s2">"54999999999.56442531007152770894"</span><span class="p">,</span>
+    <span class="na">realized</span><span class="p">:</span> <span class="s2">"0"</span><span class="p">,</span>
     <span class="na">timestamp</span><span class="p">:</span> <span class="mi">1534435013</span><span class="p">,</span>
-    <span class="na">total</span><span class="p">:</span> <span class="s2">"0.188401012373453296690002"</span><span class="p">,</span>
+    <span class="na">total</span><span class="p">:</span> <span class="s2">"0.035401012373453296690002"</span><span class="p">,</span>
     <span class="na">totalPosition</span><span class="p">:</span> <span class="s2">"0"</span><span class="p">,</span>
     <span class="na">numEscrowed</span><span class="p">:</span> <span class="s2">"0"</span><span class="p">,</span>
-    <span class="na">unrealized</span><span class="p">:</span> <span class="s2">"0.188401012373453296690002"</span><span class="p">,</span>
+    <span class="na">unrealized</span><span class="p">:</span> <span class="s2">"0.035401012373453296690002"</span><span class="p">,</span>
   <span class="p">},</span>
 <span class="p">]</span>
 
@@ -14225,18 +14225,18 @@ should lose all economic value, while any REP Staked on the Market’s true Outc
 <h4 id="strong-strong"><strong>Properties:</strong></h4>
 
 <ul>
-<li><strong><code class="prettyprint">averagePrice</code></strong> (string) Average price paid to acquire this position, in ETH.</li>
+<li><strong><code class="prettyprint">averagePrice</code></strong> (string) Average price paid to acquire this position, in ETH. (This is always the price of the Long Position, even when for a Short Position.)</li>
 <li><strong><code class="prettyprint">cost</code></strong> (string) Cost per Share to acquire this position, in ETH.</li>
 <li><strong><code class="prettyprint">marketId</code></strong> (string) Contract address of the Market, as a hexadecimal string.</li>
 <li><strong><code class="prettyprint">netPosition</code></strong> (string) <code class="prettyprint">position</code> adjusted when a Short Position exists. For example, if the user has a Short Position (defined as having a <code class="prettyprint">totalPosition</code> &gt; 0 for all but one Outcome), the <code class="prettyprint">netPosition</code> of all <code class="prettyprint">totalPosition</code> &gt; 0 Outcomes is <code class="prettyprint">totalPosition</code> - min(<code class="prettyprint">totalPosition</code>s), and the <code class="prettyprint">netPosition</code> for the Outcome with a <code class="prettyprint">totalPosition</code> of 0 is min(<code class="prettyprint">totalPosition</code>s).</li>
 <li><strong><code class="prettyprint">numEscrowed</code></strong> (string) Number of Shares in <code class="prettyprint">outcome</code> the user has escrowed for Open Orders.</li>
 <li><strong><code class="prettyprint">outcome</code></strong> (number) Outcome of the Shares the user owns.</li>
 <li><strong><code class="prettyprint">position</code></strong> (string) Raw number of Shares in <code class="prettyprint">outcome</code> that the user holds.</li>
-<li><strong><code class="prettyprint">realized</code></strong> (string) ETH profit or loss the user took upon closing this position.</li>
+<li><strong><code class="prettyprint">realized</code></strong> (string) ETH profit or loss the user took upon closing this Position (relative to the Outcome being traded).</li>
 <li><strong><code class="prettyprint">timestamp</code></strong> (number) Unix timestamp when user&rsquo;s trade position last changed. (If the user has no position, this is the current block time.)</li>
 <li><strong><code class="prettyprint">total</code></strong> (string) The sum of <code class="prettyprint">realized</code> and <code class="prettyprint">unrealized</code>.</li>
-<li><strong><code class="prettyprint">totalPosition</code></strong> (string) <code class="prettyprint">position</code> plus <code class="prettyprint">numEscrowed</code>.</li>
-<li><strong><code class="prettyprint">unrealized</code></strong> (string) Profit or loss the user would take if they closed their position at the last trade price, in ETH.</li>
+<li><strong><code class="prettyprint">totalPosition</code></strong> (string) The sum of <code class="prettyprint">position</code> and <code class="prettyprint">numEscrowed</code>.</li>
+<li><strong><code class="prettyprint">unrealized</code></strong> (string) Profit or loss the user would take if they closed their position at the last trade price (using <code class="prettyprint">averagePrice</code>), in ETH.</li>
 </ul>
 
 <p><a name="WebSocket"></a></p>
